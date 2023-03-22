@@ -1,5 +1,5 @@
 import './App.scss';
-import { getAllGuestsAsync, addGuestAsync, editGuestAsync } from '../../store/guests/guestsActionCreaters';
+import { getAllGuestsAsync, addGuestAsync, editGuestAsync, calculateMoneyAsync } from '../../store/guests/guestsActionCreaters';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { createValidDate, createValidTime } from '../../utils/utils';
@@ -41,10 +41,8 @@ function App() {
 
   const guestButtonHandler = (id) => {
     const stopDate = new Date();
-    dispatch(editGuestAsync({
-      options: {
-        stop_time: createValidTime(stopDate),
-      },
+    dispatch(calculateMoneyAsync({
+      stopTime: createValidTime(stopDate),
       id
     }))
   }
@@ -59,7 +57,8 @@ function App() {
         <button className="test__button" onClick={buttonHandler}>Reload guests</button>
         {
           // guestsIsLoading && <span className="test__loader">Loading...</span>
-          guestsIsLoading && <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          // guestsIsLoading && <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          guestsIsLoading && <span class="loader"></span>
         }
 
         <div className="guests__form form">
@@ -73,6 +72,10 @@ function App() {
               <li className="guests__item item" key={guest.id}>
                 <span className="item__time">
                   {guest.start_time} - {guest.stop_time || '...'}
+                </span>
+
+                <span className="item__time">
+                  {guest.minutes || '*'}
                 </span>
                 <span className="item_name">{guest.name}</span>
                 <button className="item__button" onClick={() => {guestButtonHandler(guest.id)}}>Рассчитать</button>

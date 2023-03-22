@@ -2,6 +2,7 @@ import {
   GET_ALL_GUESTS_PENDING, GET_ALL_GUESTS_SUCCESS, GET_ALL_GUESTS_ERROR, 
   ADD_GUEST_PENDING, ADD_GUEST_SUCCESS, ADD_GUEST_ERROR,
   EDIT_GUEST_PENDING, EDIT_GUEST_SUCCESS, EDIT_GUEST_ERROR,
+  CALCULATE_MONEY_PENDING, CALCULATE_MONEY_SUCCESS, CALCULATE_MONEY_ERROR,
 } from './guestsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
 
@@ -113,9 +114,50 @@ export const editGuestAsync = ({ id, options }) => {
       const guest = response.data.editedGuest;
       console.log(response);
 
-      dispatch(editGuestSuccess(guest));
+      dispatch(editGuestSuccess({ id, guest }));
     } catch (error) {
       dispatch(editGuestError(error));
+    }
+  }  
+}
+
+
+
+export const calculateMoneyPending = () => {
+  return {
+    type: CALCULATE_MONEY_PENDING,
+  }
+}
+
+export const calculateMoneySuccess = ({ id, guest }) => {
+  return {
+    type: CALCULATE_MONEY_SUCCESS,
+    payload: {
+      id,
+      guest
+    },
+  }
+}
+
+export const calculateMoneyError = (error) => {
+  return {
+    type: CALCULATE_MONEY_ERROR,
+    payload: error,
+  }
+}
+
+export const calculateMoneyAsync = ({ id, stopTime }) => {
+  return async (dispatch) => {
+    try {
+      dispatch(calculateMoneyPending());
+
+      const response = await axiosInstance.put(`/guests/calculate/${id}`, stopTime);
+      const guest = response.data.calculatedGuest;
+      console.log(response);
+
+      dispatch(calculateMoneySuccess({ id, guest }));
+    } catch (error) {
+      dispatch(calculateMoneyError(error));
     }
   }  
 }
