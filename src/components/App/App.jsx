@@ -27,22 +27,25 @@ function App() {
   }
 
   const formButtonHandler = () => {
-    const startDate = new Date();
-    dispatch(addGuestAsync({
-      date: createValidDate(startDate),
-      users_id: user.id,
-      users_name: user.name,
-      name: guestName,
-      start_time: createValidTime(startDate),
-    }))
-
-    setGuestName('');
+    if (guestName) {
+      const startDate = new Date();
+      dispatch(addGuestAsync({
+        date: createValidDate(startDate),
+        users_id: user.id,
+        users_name: user.name,
+        name: guestName,
+        start_time: createValidTime(startDate),
+      }))
+  
+      setGuestName('');
+    }
   }
 
   const guestButtonHandler = (id) => {
     const stopDate = new Date();
     dispatch(calculateMoneyAsync({
       stopTime: createValidTime(stopDate),
+      // stopTime: "16:51:04",
       id
     }))
   }
@@ -69,17 +72,32 @@ function App() {
         <ul className="guests__list">
           {guests.map(guest => {
             return (
-              <li className="guests__item item" key={guest.id}>
-                <span className="item__time">
-                  {guest.start_time} - {guest.stop_time || '...'}
-                </span>
+              <>
+                <li className="guests__item item" key={guest.id}>
+                  <span className="item__time">
+                    {guest.start_time} - {guest.stop_time || '...'}
+                  </span>
 
-                <span className="item__time">
-                  {guest.minutes || '*'}
-                </span>
-                <span className="item_name">{guest.name}</span>
-                <button className="item__button" onClick={() => {guestButtonHandler(guest.id)}}>Рассчитать</button>
-              </li>
+                  <span className="item__time">
+                    time: {guest.minutes || '*'}
+                  </span>
+
+                  <span className="item__time">
+                    money: {guest.for_payment || '*'}
+                  </span>
+
+                  <span className="item_name">{guest.name}</span>
+                  <button className="item__button" onClick={() => {guestButtonHandler(guest.id)}}>Рассчитать</button>
+                </li>
+
+
+
+                <li className="guests__description" key={guest.id}>
+                  <span>
+                    description: {guest.payment_description || '*'}
+                  </span>
+                </li>
+              </>
             )
           })}
         </ul>
