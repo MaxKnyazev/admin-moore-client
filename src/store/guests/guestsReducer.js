@@ -3,6 +3,7 @@ import {
   ADD_GUEST_PENDING, ADD_GUEST_SUCCESS, ADD_GUEST_ERROR,
   EDIT_GUEST_PENDING, EDIT_GUEST_SUCCESS, EDIT_GUEST_ERROR,
   CALCULATE_MONEY_PENDING, CALCULATE_MONEY_SUCCESS, CALCULATE_MONEY_ERROR,
+  CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
 } from './guestsActionTypes';
 
 const initialState = {
@@ -67,6 +68,23 @@ export const guestsReducer = (state = initialState, action) => {
       return {...state, isLoading: false, guests: calculatedGuests}
 
     case CALCULATE_MONEY_ERROR:
+        return {...state, isLoading: false, error: action.payload}
+
+
+
+    case CALCULATE_BREAK_PENDING:
+      return {...state, isLoading: true}
+    
+    case CALCULATE_BREAK_SUCCESS:
+      let breakGuests = [...state.guests];
+      for (let i = 0; i < state.guests.length; i++) {
+        if (state.guests[i].id === action.payload.id) {
+          breakGuests[i] = {...action.payload.guest};
+        }
+      }
+      return {...state, isLoading: false, guests: breakGuests}
+
+    case CALCULATE_BREAK_ERROR:
         return {...state, isLoading: false, error: action.payload}
 
     default: return state;

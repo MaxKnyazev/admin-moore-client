@@ -3,6 +3,7 @@ import {
   ADD_GUEST_PENDING, ADD_GUEST_SUCCESS, ADD_GUEST_ERROR,
   EDIT_GUEST_PENDING, EDIT_GUEST_SUCCESS, EDIT_GUEST_ERROR,
   CALCULATE_MONEY_PENDING, CALCULATE_MONEY_SUCCESS, CALCULATE_MONEY_ERROR,
+  CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
 } from './guestsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
 
@@ -151,13 +152,59 @@ export const calculateMoneyAsync = ({ id, stopTime }) => {
     try {
       dispatch(calculateMoneyPending());
 
-      const response = await axiosInstance.put(`/guests/calculate/${id}`, stopTime);
+      const response = await axiosInstance.put(`/guests/calculate/${id}`, { stopTime });
       const guest = response.data.calculatedGuest;
       console.log(response);
 
       dispatch(calculateMoneySuccess({ id, guest }));
     } catch (error) {
       dispatch(calculateMoneyError(error));
+    }
+  }  
+}
+
+
+
+export const calculateBreakPending = () => {
+  return {
+    type: CALCULATE_BREAK_PENDING,
+  }
+}
+
+export const calculateBreakSuccess = ({ id, guest }) => {
+  return {
+    type: CALCULATE_BREAK_SUCCESS,
+    payload: {
+      id,
+      guest
+    },
+  }
+}
+
+export const calculateBreakError = (error) => {
+  return {
+    type: CALCULATE_BREAK_ERROR,
+    payload: error,
+  }
+}
+
+export const calculateBreakAsync = ({ id, breakStopTime }) => {
+  return async (dispatch) => {
+    try {
+      dispatch(calculateBreakPending());
+
+      // console.log(`************************************************`)
+      // console.log(breakStopTime);
+      // console.log(typeof breakStopTime);
+      // console.log(`************************************************`)
+
+      const response = await axiosInstance.put(`/guests/break/${id}`, { breakStopTime });
+      const guest = response.data.breakGuest;
+      console.log(response);
+
+      dispatch(calculateBreakSuccess({ id, guest }));
+    } catch (error) {
+      dispatch(calculateBreakError(error));
     }
   }  
 }

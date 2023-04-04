@@ -1,5 +1,5 @@
 import './App.scss';
-import { getAllGuestsAsync, addGuestAsync, editGuestAsync, calculateMoneyAsync } from '../../store/guests/guestsActionCreaters';
+import { getAllGuestsAsync, addGuestAsync, editGuestAsync, calculateMoneyAsync, calculateBreakAsync } from '../../store/guests/guestsActionCreaters';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { createValidDate, createValidTime } from '../../utils/utils';
@@ -41,13 +41,31 @@ function App() {
     }
   }
 
-  const guestButtonHandler = (id) => {
+  const calculateButtonHandler = (id) => {
     const stopDate = new Date();
     dispatch(calculateMoneyAsync({
       stopTime: createValidTime(stopDate),
-      // stopTime: "16:51:04",
       id
     }))
+  }
+
+  const breakButtonHandler = (id, isBreak) => {
+    if (isBreak) {
+      const breakStopDate = new Date();
+      dispatch(calculateBreakAsync({
+        id,
+        breakStopTime: createValidTime(breakStopDate)
+      }))
+    } else {
+      const breakStartDate = new Date();
+      dispatch(editGuestAsync({
+        id, 
+        options: {
+          break_start_time: createValidTime(breakStartDate),
+          is_break: true,
+        }}
+      ))
+    }
   }
 
   return (
@@ -73,11 +91,25 @@ function App() {
           {guests.map(guest => {
             return (
               <>
-                <li className="guests__item item" key={guest.id}>
+                <li className="guests__item item" key={`${guest.id}2`}>
+                  {
+                    guest.is_break 
+                    ? <button className="item__button" onClick={() => {breakButtonHandler(guest.id, guest.is_break)}}>Продолжить</button>
+                    : <button className="item__button" onClick={() => {breakButtonHandler(guest.id, guest.is_break)}}>Пауза</button> 
+                  }
+                  
                   <span className="item__time">
                     {guest.start_time} - {guest.stop_time || '...'}
                   </span>
 
+                  <span className="item_name">{guest.name}</span>
+
+                  <button className="item__button" onClick={() => {calculateButtonHandler(guest.id)}}>Рассчитать</button>
+                </li>
+
+
+
+                <li className="guests__description" key={guest.id}>
                   <span className="item__time">
                     time: {guest.minutes || '*'}
                   </span>
@@ -86,13 +118,6 @@ function App() {
                     money: {guest.for_payment || '*'}
                   </span>
 
-                  <span className="item_name">{guest.name}</span>
-                  <button className="item__button" onClick={() => {guestButtonHandler(guest.id)}}>Рассчитать</button>
-                </li>
-
-
-
-                <li className="guests__description" key={guest.id}>
                   <span>
                     description: {guest.payment_description || '*'}
                   </span>
