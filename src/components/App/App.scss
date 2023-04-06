@@ -11,6 +11,14 @@
   }
 }
 
+.opacity {
+  opacity: 0.5;
+}
+
+// .app body html {
+//   position: relative;
+// }
+
 // ****************************************************************
 
 .header {
@@ -27,11 +35,32 @@
   align-items: center;
   flex-direction: column;
 
+  &__wrapper {
+    border-bottom: 5px solid rgb(117, 193, 255);
+    margin-bottom: 2vh;
+  }
+
   &__list {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    // justify-content: center;
+    // align-items: center;
     flex-direction: column;
+    height: 50vh;
+    width: 70vw;
+    overflow-y: scroll;
+    background-color: rgb(245, 245, 245);
+  }
+
+  .item {
+    &__button {
+      min-width: 8vw;
+      min-height: 3vh;
+      background-color: #8d8d8d;
+    }
+  }
+
+  .item--additional {
+    background-color: rgb(192, 192, 192);
   }
 
   &__item {
@@ -42,13 +71,6 @@
     min-height: 3vh;
     background-color: rgb(231, 231, 231);
 
-    .item {
-      &__button {
-        min-width: 8vw;
-        min-height: 3vh;
-        background-color: #8d8d8d;
-      }
-    }
   }
 
   &__description {
@@ -57,8 +79,7 @@
     align-items: center;
     min-width: 50vw;
     min-height: 3vh;
-    background-color: rgb(209, 209, 209);
-    margin-bottom: 2vh;
+    background-color: rgb(218, 218, 218);
   }
 
   &__form {
@@ -68,6 +89,13 @@
     margin: 3vh 0 3vh 0;
 
     .form {
+      &__tariff {
+        text-align: center;
+        min-width: 10vw;
+        min-height: 3vh;
+        background-color: rgb(199, 199, 199);
+      }
+
       &__input {
         min-width: 15vw;
         min-height: 3vh;
@@ -81,6 +109,55 @@
         background-color: #8d8d8d;
       }
     }
+  }
+}
+
+
+
+.paymentModal {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__wrapper {
+    width: 50vw;
+    height: 50vh;
+    background-color: #fff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  &__description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 3vh;
+  }
+
+  &__input {
+    min-width: 15vw;
+    min-height: 3vh;
+    background-color: #dbdbdb;
+    padding-left: 10px;
+    margin-bottom: 0.5rem;
+  }
+
+  &__button {
+    margin: 1rem 0.5rem 0 0.5rem;
+    min-width: 8vw;
+    min-height: 3vh;
+    background-color: #8d8d8d;
   }
 }
 
