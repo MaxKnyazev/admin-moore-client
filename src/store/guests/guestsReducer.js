@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   guests: [],
+  currentGuest: {},
   isLoading: false,
   error: null,
 }
@@ -47,7 +48,7 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
 
-      return {...state, isLoading: false, guests: editedGuests}
+      return {...state, isLoading: false, guests: editedGuests, currentGuest: {}}
 
     case EDIT_GUEST_ERROR:
       return {...state, isLoading: false, error: action.payload}
@@ -65,7 +66,7 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
 
-      return {...state, isLoading: false, guests: calculatedGuests}
+      return {...state, isLoading: false, guests: calculatedGuests, currentGuest: action.payload.guest}
 
     case CALCULATE_MONEY_ERROR:
         return {...state, isLoading: false, error: action.payload}

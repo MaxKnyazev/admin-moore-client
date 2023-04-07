@@ -7,7 +7,7 @@ import React from 'react';
 
 function App() {
   const dispatch = useDispatch();
-  const { guests } = useSelector(state => state.guestsReducer);
+  const { guests, currentGuest } = useSelector(state => state.guestsReducer);
   const guestsIsLoading = useSelector(state => state.guestsReducer.isLoading);
   const { user } = useSelector(state => state.authReducer);
   // const authIsLoading = useSelector(state => state.authReducer.isLoading);
@@ -18,14 +18,13 @@ function App() {
 
   const [ guestName, setGuestName ] = useState('');
   const [ guestTariff, setGuestTariff ] = useState('1');
-  const [ currentGuest, setCurrentGuest ] = useState({});
-  const [ showModal, setShowModal ] = useState(true);
+  // const [ currentGuest, setCurrentGuest ] = useState({});
+  const [ showModal, setShowModal ] = useState(false);
   const [ modalCashInput, setModalCashInput ] = useState(0);
   const [ modalNoncashInput, setModalNoncashInput ] = useState(0);
 
   const buttonHandler = () => {
     dispatch(getAllGuestsAsync())
-    console.log(guests);
   }
 
   const formInputHandler = e => {
@@ -52,15 +51,16 @@ function App() {
     }
   }
 
-  const calculateButtonHandler = (guest) => {
+  const calculateButtonHandler = async (guest) => {
     const stopDate = new Date();
+    // setCurrentGuest(guest);
     dispatch(calculateMoneyAsync({
       stopTime: createValidTime(stopDate),
       id: guest.id,
     }))
 
+    console.log(currentGuest)
     setShowModal(true);
-    setCurrentGuest(guest);
   }
 
   const breakButtonHandler = (id, isBreak) => {
@@ -184,6 +184,10 @@ function App() {
 
                   <span className="item__time">
                     money: {guest.for_payment || '*'}
+                  </span>
+
+                  <span className="item__time">
+                    tariff: {guest.tariffs_id || '*'}
                   </span>
                 </div>
 
