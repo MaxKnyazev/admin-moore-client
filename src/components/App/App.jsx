@@ -22,7 +22,11 @@ function App() {
   const [ showModal, setShowModal ] = useState(false);
   const [ modalCashInput, setModalCashInput ] = useState(0);
   const [ modalNoncashInput, setModalNoncashInput ] = useState(0);
-
+  const [ cashboxCashInput, setCashboxCashInput ] = useState(0);
+  const [ cashboxNoncashInput, setCashboxNoncashInput ] = useState(0);
+  const [ cashboxCashComment, setCashboxCashComment ] = useState(0);
+  const [ cashboxNonCashComment, setCashboxNonCashComment ] = useState(0);
+  
   const buttonHandler = () => {
     dispatch(getAllGuestsAsync())
   }
@@ -125,8 +129,6 @@ function App() {
       <section className="guests">
         <button className="test__button" onClick={buttonHandler}>Reload guests</button>
         {
-          // guestsIsLoading && <span className="test__loader">Loading...</span>
-          // guestsIsLoading && <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
           guestsIsLoading && <span class="loader"></span>
         }
 
@@ -142,6 +144,10 @@ function App() {
 
         <ul className="guests__list">
           {guests.sort((firstGuest, secondGuest) => {
+            if ((firstGuest.result_money === secondGuest.result_money)&&(firstGuest.start_time === secondGuest.start_time)) {
+              return 0;
+            }
+            
             if (firstGuest.result_money == secondGuest.result_money) {
               if (firstGuest.start_time > secondGuest.start_time) {
                 return 1;
@@ -171,8 +177,11 @@ function App() {
                     {guest.start_time} - {guest.stop_time || '...'}
                   </span>
 
-
-                  <button className="item__button" onClick={() => {calculateButtonHandler(guest)}}>Рассчитать</button>
+                  {
+                    guest.result_money
+                    ? <span>Человек ушел...</span>
+                    : <button className="item__button" onClick={() => {calculateButtonHandler(guest)}}>Рассчитать</button>
+                  }
                 </div>
 
 
@@ -205,7 +214,35 @@ function App() {
       </section>
 
       <section className="cashbox">
+          <div className="cashbox__money">
+            <label htmlFor="noncash">Безналичные:</label>
+            <input className="cashbox__input" type="number" />
+
+            <label htmlFor="cash">Комментарий:</label>
+            <input className="cashbox__input" type="number" />
+
+            <div className="cashbox__buttons">
+              <button className="cashbox__button">Добавить</button>
+              <button className="cashbox__button">Убрать</button>
+            </div>
+          </div>
           
+          <div className="cashbox__display">
+            18.000
+          </div>
+          
+          <div className="cashbox__money">
+            <label htmlFor="cash">Наличные:</label>
+            <input className="cashbox__input" type="number" />
+
+            <label htmlFor="cash">Комментарий:</label>
+            <input className="cashbox__input" type="number" />
+
+            <div className="cashbox__buttons">
+              <button className="cashbox__button">Добавить</button>
+              <button className="cashbox__button">Убрать</button>
+            </div>
+          </div>
       </section>
 
       {
