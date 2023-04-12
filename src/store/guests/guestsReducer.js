@@ -5,6 +5,7 @@ import {
   CALCULATE_MONEY_PENDING, CALCULATE_MONEY_SUCCESS, CALCULATE_MONEY_ERROR,
   CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
 } from './guestsActionTypes';
+import { sortGuests } from '../../utils/utils';
 
 const initialState = {
   guests: [],
@@ -19,7 +20,7 @@ export const guestsReducer = (state = initialState, action) => {
       return {...state, isLoading: true}
     
     case GET_ALL_GUESTS_SUCCESS:
-      return {...state, isLoading: false, guests: action.payload}
+      return {...state, isLoading: false, guests: sortGuests(action.payload)}
 
     case GET_ALL_GUESTS_ERROR:
       return {...state, isLoading: false, error: action.payload}
@@ -30,7 +31,7 @@ export const guestsReducer = (state = initialState, action) => {
       return {...state, isLoading: true}
     
     case ADD_GUEST_SUCCESS:
-      return {...state, isLoading: false, guests: [...state.guests, action.payload]}
+      return {...state, isLoading: false, guests: sortGuests([...state.guests, action.payload])}
 
     case ADD_GUEST_ERROR:
       return {...state, isLoading: false, error: action.payload}
@@ -48,7 +49,7 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
 
-      return {...state, isLoading: false, guests: editedGuests, currentGuest: {}}
+      return {...state, isLoading: false, guests: sortGuests(editedGuests), currentGuest: {}}
 
     case EDIT_GUEST_ERROR:
       return {...state, isLoading: false, error: action.payload}
@@ -66,7 +67,7 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
 
-      return {...state, isLoading: false, guests: calculatedGuests, currentGuest: action.payload.guest}
+      return {...state, isLoading: false, guests: sortGuests(calculatedGuests), currentGuest: action.payload.guest}
 
     case CALCULATE_MONEY_ERROR:
         return {...state, isLoading: false, error: action.payload}
@@ -83,7 +84,7 @@ export const guestsReducer = (state = initialState, action) => {
           breakGuests[i] = {...action.payload.guest};
         }
       }
-      return {...state, isLoading: false, guests: breakGuests}
+      return {...state, isLoading: false, guests: sortGuests(breakGuests)}
 
     case CALCULATE_BREAK_ERROR:
         return {...state, isLoading: false, error: action.payload}

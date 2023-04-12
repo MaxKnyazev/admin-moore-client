@@ -18,3 +18,33 @@ export const createValidTime = date => {
 
   return `${hours}:${minutes}:${seconds}`;
 }
+
+export const sortGuests = guests => {
+  let activeGuests = [];
+  let inactiveGuests = [];
+
+  for (let guest of guests) {
+    if (guest.stop_time !== null) {
+      inactiveGuests.push(guest)
+    } else {
+      activeGuests.push(guest)
+    }
+  }
+
+  return [
+    ...activeGuests.sort(sortGuestsByTime),
+    ...inactiveGuests.sort(sortGuestsByTime)
+  ]
+}
+
+const sortGuestsByTime = (firstGuest, secondGuest) => {
+  if (firstGuest.start_time === secondGuest.start_time) {
+    return 0
+  }
+
+  if (firstGuest.start_time < secondGuest.start_time) {
+    return -1
+  } else {
+    return 1
+  }
+}

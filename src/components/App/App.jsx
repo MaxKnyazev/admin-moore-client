@@ -31,6 +31,8 @@ function App() {
     dispatch(getAllGuestsAsync())
   }
 
+  console.log(guests);
+
   const formInputHandler = e => {
     setGuestName(e.target.value);
   }
@@ -143,25 +145,7 @@ function App() {
         </div>
 
         <ul className="guests__list">
-          {guests.sort((firstGuest, secondGuest) => {
-            if ((firstGuest.result_money === secondGuest.result_money)&&(firstGuest.start_time === secondGuest.start_time)) {
-              return 0;
-            }
-            
-            if (firstGuest.result_money == secondGuest.result_money) {
-              if (firstGuest.start_time > secondGuest.start_time) {
-                return 1;
-              } else {
-                return -1;
-              }
-            }
-
-            if (firstGuest.result_money > secondGuest.result_money) {
-              return 1;
-            } else {
-              return -1;
-            }
-          }).map(guest => {
+          {guests.map(guest => {
             return (
               <li key={guest.id} className={guest.stop_time ? 'guests__wrapper opacity' : 'guests__wrapper'}>
                 <div className="guests__item item">
