@@ -20,25 +20,28 @@ function App() {
   const [ guestTariff, setGuestTariff ] = useState('1');
   // const [ currentGuest, setCurrentGuest ] = useState({});
   const [ showModal, setShowModal ] = useState(false);
-  const [ modalCashInput, setModalCashInput ] = useState(0);
-  const [ modalNoncashInput, setModalNoncashInput ] = useState(0);
-  const [ cashboxCashInput, setCashboxCashInput ] = useState(0);
-  const [ cashboxNoncashInput, setCashboxNoncashInput ] = useState(0);
-  const [ cashboxCashComment, setCashboxCashComment ] = useState(0);
-  const [ cashboxNonCashComment, setCashboxNonCashComment ] = useState(0);
+  const [ modalCashInput, setModalCashInput ] = useState('');
+  const [ modalNoncashInput, setModalNoncashInput ] = useState('');
+  const [ cashboxCashInput, setCashboxCashInput ] = useState('');
+  const [ cashboxCashComment, setCashboxCashComment ] = useState('');
+  const [ cashboxNoncashInput, setCashboxNoncashInput ] = useState('');
+  const [ cashboxNoncashComment, setCashboxNoncashComment ] = useState('');
+  const [ searchInput, setSearchInput ] = useState('');
   
   const buttonHandler = () => {
     dispatch(getAllGuestsAsync())
   }
 
-  console.log(guests);
-
-  const formInputHandler = e => {
-    setGuestName(e.target.value);
+  const inputHandler = (e, setInput) => {
+    setInput(e.target.value);
   }
 
   const formTariffHandler = e => {
     setGuestTariff(e.target.value);
+  }
+
+  const searchClearButtonHandler = () => {
+    setSearchInput('');
   }
 
   const formButtonHandler = () => {
@@ -102,6 +105,8 @@ function App() {
       }}
     ))
 
+    setCashboxNoncashInput('');
+    setCashboxCashInput('');
     setShowModal(false);
   }
 
@@ -115,11 +120,9 @@ function App() {
       }}
     ))
 
+    setCashboxNoncashInput('');
+    setCashboxCashInput('');
     setShowModal(false);
-  }
-
-  const modalInputHandler = (e, setInput) => {
-    setInput(e.target.value);
   }
 
   return (
@@ -140,12 +143,27 @@ function App() {
               <option value="2">Детский</option>
             </select>
 
-          <input className="form__input" type="text" value={guestName} onChange={formInputHandler} />
+          <input className="form__input" placeholder="Guest name..." type="text" value={guestName} onChange={e => inputHandler(e, setGuestName)} />
           <button className="form__button" onClick={formButtonHandler}>Add guest</button>
         </div>
 
+
+
+
+
+
+        <div className="guests__form form">
+          <input className="form__input" placeholder="Search..." type="text" value={searchInput} onChange={e => inputHandler(e, setSearchInput)} />
+          <button className="form__button" onClick={searchClearButtonHandler}>Clear</button>
+        </div>
+
+
+
+
+
+
         <ul className="guests__list">
-          {guests.map(guest => {
+          {guests.filter(guest => guest.name.includes(searchInput)).map(guest => {
             return (
               <li key={guest.id} className={guest.stop_time ? 'guests__wrapper opacity' : 'guests__wrapper'}>
                 <div className="guests__item item">
@@ -200,10 +218,10 @@ function App() {
       <section className="cashbox">
           <div className="cashbox__money">
             <label htmlFor="noncash">Безналичные:</label>
-            <input className="cashbox__input" type="number" />
+            <input className="cashbox__input" placeholder="Non-cash..." type="number" value={cashboxNoncashInput} onChange={e => inputHandler(e, setCashboxNoncashInput)} />
 
             <label htmlFor="cash">Комментарий:</label>
-            <input className="cashbox__input" type="number" />
+            <input className="cashbox__input" placeholder="Comment..." type="number" value={cashboxNoncashComment} onChange={e => inputHandler(e, setCashboxNoncashComment)} />
 
             <div className="cashbox__buttons">
               <button className="cashbox__button">Добавить</button>
@@ -217,10 +235,10 @@ function App() {
           
           <div className="cashbox__money">
             <label htmlFor="cash">Наличные:</label>
-            <input className="cashbox__input" type="number" />
+            <input className="cashbox__input" placeholder="Cash..." type="number" value={cashboxCashInput} onChange={e => inputHandler(e, setCashboxCashInput)} />
 
             <label htmlFor="cash">Комментарий:</label>
-            <input className="cashbox__input" type="number" />
+            <input className="cashbox__input" placeholder="Comment..." type="number" value={cashboxCashComment} onChange={e => inputHandler(e, setCashboxCashComment)} />
 
             <div className="cashbox__buttons">
               <button className="cashbox__button">Добавить</button>
@@ -242,10 +260,10 @@ function App() {
             </div>
 
             <label htmlFor="">Наличные:</label>
-            <input type="number" className="paymentModal__input" value={modalCashInput} onChange={e => {modalInputHandler(e, setModalCashInput)}} />
+            <input type="number" placeholder="Cash..." className="paymentModal__input" value={modalCashInput} onChange={e => {inputHandler(e, setModalCashInput)}} />
 
             <label htmlFor="">Безналичные:</label>
-            <input type="number" className="paymentModal__input" value={modalNoncashInput} onChange={e => {modalInputHandler(e, setModalNoncashInput)}} />
+            <input type="number" placeholder="Non-cash..." className="paymentModal__input" value={modalNoncashInput} onChange={e => {inputHandler(e, setModalNoncashInput)}} />
 
 
             <div className="paymentModal__buttons">

@@ -3,7 +3,7 @@
     min-width: 8vw;
     min-height: 3vh;
     background-color: #8d8d8d;
-    margin: 5vh 0 1vh 0;
+    margin: 2vh 0 1vh 0;
   }
 
   &__loader {
@@ -49,6 +49,7 @@
     width: 70vw;
     overflow-y: scroll;
     background-color: rgb(245, 245, 245);
+    margin-top: 2vh;
   }
 
   .item {
@@ -86,7 +87,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 3vh 0 3vh 0;
+    margin-bottom: 1vh;
 
     .form {
       &__tariff {
