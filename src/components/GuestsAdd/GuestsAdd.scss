@@ -1,0 +1,28 @@
+.guests__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1vh;
+
+  .form {
+    &__tariff {
+      text-align: center;
+      min-width: 10vw;
+      min-height: 3vh;
+      background-color: rgb(199, 199, 199);
+    }
+
+    &__input {
+      min-width: 15vw;
+      min-height: 3vh;
+      background-color: #dbdbdb;
+      padding-left: 10px;
+    }
+
+    &__button {
+      min-width: 8vw;
+      min-height: 3vh;
+      background-color: #8d8d8d;
+    }
+  }
+}

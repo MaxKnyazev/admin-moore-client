@@ -1,94 +1,24 @@
 import './App.scss';
-import { getAllGuestsAsync, addGuestAsync, editGuestAsync, calculateMoneyAsync, calculateBreakAsync } from '../../store/guests/guestsActionCreaters';
+import { editGuestAsync } from '../../store/guests/guestsActionCreaters';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { createValidDate, createValidTime } from '../../utils/utils';
+import { useState } from 'react';
 import React from 'react';
+import Header from '../Header';
+import Guests from '../Guests';
 
 function App() {
   const dispatch = useDispatch();
-  const { guests, currentGuest } = useSelector(state => state.guestsReducer);
-  const guestsIsLoading = useSelector(state => state.guestsReducer.isLoading);
-  const { user } = useSelector(state => state.authReducer);
-  // const authIsLoading = useSelector(state => state.authReducer.isLoading);
+  const { currentGuest, showModal } = useSelector(state => state.guestsReducer);
 
-  // useEffect(() => {
-  //   dispatch(getAllGuestsAsync())
-  // }, [dispatch])
-
-  const [ guestName, setGuestName ] = useState('');
-  const [ guestTariff, setGuestTariff ] = useState('1');
-  // const [ currentGuest, setCurrentGuest ] = useState({});
-  const [ showModal, setShowModal ] = useState(false);
   const [ modalCashInput, setModalCashInput ] = useState('');
   const [ modalNoncashInput, setModalNoncashInput ] = useState('');
   const [ cashboxCashInput, setCashboxCashInput ] = useState('');
   const [ cashboxCashComment, setCashboxCashComment ] = useState('');
   const [ cashboxNoncashInput, setCashboxNoncashInput ] = useState('');
   const [ cashboxNoncashComment, setCashboxNoncashComment ] = useState('');
-  const [ searchInput, setSearchInput ] = useState('');
-  
-  const buttonHandler = () => {
-    dispatch(getAllGuestsAsync())
-  }
 
   const inputHandler = (e, setInput) => {
     setInput(e.target.value);
-  }
-
-  const formTariffHandler = e => {
-    setGuestTariff(e.target.value);
-  }
-
-  const searchClearButtonHandler = () => {
-    setSearchInput('');
-  }
-
-  const formButtonHandler = () => {
-    if (guestName) {
-      const startDate = new Date();
-      dispatch(addGuestAsync({
-        date: createValidDate(startDate),
-        users_id: user.id,
-        users_name: user.name,
-        name: guestName,
-        start_time: createValidTime(startDate),
-        tariffs_id: guestTariff,
-      }))
-  
-      setGuestName('');
-    }
-  }
-
-  const calculateButtonHandler = async (guest) => {
-    const stopDate = new Date();
-    // setCurrentGuest(guest);
-    dispatch(calculateMoneyAsync({
-      stopTime: createValidTime(stopDate),
-      id: guest.id,
-    }))
-
-    console.log(currentGuest)
-    setShowModal(true);
-  }
-
-  const breakButtonHandler = (id, isBreak) => {
-    if (isBreak) {
-      const breakStopDate = new Date();
-      dispatch(calculateBreakAsync({
-        id,
-        breakStopTime: createValidTime(breakStopDate)
-      }))
-    } else {
-      const breakStartDate = new Date();
-      dispatch(editGuestAsync({
-        id, 
-        options: {
-          break_start_time: createValidTime(breakStartDate),
-          is_break: true,
-        }}
-      ))
-    }
   }
 
   const modalCancelButtonHandler = () => {
@@ -107,7 +37,6 @@ function App() {
 
     setCashboxNoncashInput('');
     setCashboxCashInput('');
-    setShowModal(false);
   }
 
   const modalPaymentButtonHandler = () => {
@@ -122,99 +51,14 @@ function App() {
 
     setCashboxNoncashInput('');
     setCashboxCashInput('');
-    setShowModal(false);
   }
 
   return (
     <div className="App">
-      <header className="header">
-        <h1 className="header__title">Admin Moore</h1>
-      </header>
-  
-      <section className="guests">
-        <button className="test__button" onClick={buttonHandler}>Reload guests</button>
-        {
-          guestsIsLoading && <span class="loader"></span>
-        }
+      <Header />
 
-        <div className="guests__form form">
-            <select defaultValue="1" onChange={formTariffHandler} className="form__tariff" name="tariff">
-              <option value="1">Взрослый</option>
-              <option value="2">Детский</option>
-            </select>
-
-          <input className="form__input" placeholder="Guest name..." type="text" value={guestName} onChange={e => inputHandler(e, setGuestName)} />
-          <button className="form__button" onClick={formButtonHandler}>Add guest</button>
-        </div>
-
-
-
-
-
-
-        <div className="guests__form form">
-          <input className="form__input" placeholder="Search..." type="text" value={searchInput} onChange={e => inputHandler(e, setSearchInput)} />
-          <button className="form__button" onClick={searchClearButtonHandler}>Clear</button>
-        </div>
-
-
-
-
-
-
-        <ul className="guests__list">
-          {guests.filter(guest => guest.name.includes(searchInput)).map(guest => {
-            return (
-              <li key={guest.id} className={guest.stop_time ? 'guests__wrapper opacity' : 'guests__wrapper'}>
-                <div className="guests__item item">
-                  {
-                    guest.is_break 
-                    ? <button className="item__button" onClick={() => {breakButtonHandler(guest.id, guest.is_break)}}>Продолжить</button>
-                    : <button className="item__button" onClick={() => {breakButtonHandler(guest.id, guest.is_break)}}>Пауза</button> 
-                  }
-
-                  <span className="item_name">{guest.name}</span>
-                  
-                  <span className="item__time">
-                    {guest.start_time} - {guest.stop_time || '...'}
-                  </span>
-
-                  {
-                    guest.result_money
-                    ? <span>Человек ушел...</span>
-                    : <button className="item__button" onClick={() => {calculateButtonHandler(guest)}}>Рассчитать</button>
-                  }
-                </div>
-
-
-
-                <div className="guests__item item--additional">
-                  <span className="item__time">
-                    time: {guest.minutes || '*'}
-                  </span>
-
-                  <span className="item__time">
-                    money: {guest.for_payment || '*'}
-                  </span>
-
-                  <span className="item__time">
-                    tariff: {guest.tariffs_id || '*'}
-                  </span>
-                </div>
-
-
-                
-                <div className="guests__description">
-                  <span>
-                    {guest.payment_description || '*'}
-                  </span>
-                </div>
-              </li>
-            )
-          })}
-        </ul>
-      </section>
-
+      <Guests />
+      
       <section className="cashbox">
           <div className="cashbox__money">
             <label htmlFor="noncash">Безналичные:</label>

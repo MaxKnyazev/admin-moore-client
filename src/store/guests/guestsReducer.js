@@ -12,6 +12,7 @@ const initialState = {
   currentGuest: {},
   isLoading: false,
   error: null,
+  showModal: false,
 }
 
 export const guestsReducer = (state = initialState, action) => {
@@ -49,10 +50,10 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
 
-      return {...state, isLoading: false, guests: sortGuests(editedGuests), currentGuest: {}}
+      return {...state, isLoading: false, guests: sortGuests(editedGuests), currentGuest: {}, showModal: false}
 
     case EDIT_GUEST_ERROR:
-      return {...state, isLoading: false, error: action.payload}
+      return {...state, isLoading: false, error: action.payload, showModal: false}
 
 
 
@@ -67,7 +68,7 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
 
-      return {...state, isLoading: false, guests: sortGuests(calculatedGuests), currentGuest: action.payload.guest}
+      return {...state, isLoading: false, guests: sortGuests(calculatedGuests), currentGuest: action.payload.guest, showModal: true}
 
     case CALCULATE_MONEY_ERROR:
         return {...state, isLoading: false, error: action.payload}
