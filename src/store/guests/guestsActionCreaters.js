@@ -4,6 +4,7 @@ import {
   EDIT_GUEST_PENDING, EDIT_GUEST_SUCCESS, EDIT_GUEST_ERROR,
   CALCULATE_MONEY_PENDING, CALCULATE_MONEY_SUCCESS, CALCULATE_MONEY_ERROR,
   CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
+  CHANGE_SEARCH_INPUT_SUCCESS, CHANGE_SEARCH_INPUT_ERROR,
 } from './guestsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
 
@@ -193,11 +194,6 @@ export const calculateBreakAsync = ({ id, breakStopTime }) => {
     try {
       dispatch(calculateBreakPending());
 
-      // console.log(`************************************************`)
-      // console.log(breakStopTime);
-      // console.log(typeof breakStopTime);
-      // console.log(`************************************************`)
-
       const response = await axiosInstance.put(`/guests/break/${id}`, { breakStopTime });
       const guest = response.data.breakGuest;
       console.log(response);
@@ -205,6 +201,32 @@ export const calculateBreakAsync = ({ id, breakStopTime }) => {
       dispatch(calculateBreakSuccess({ id, guest }));
     } catch (error) {
       dispatch(calculateBreakError(error));
+    }
+  }  
+}
+
+
+
+export const changeSearchInputSuccess = (value) => {
+  return {
+    type: CHANGE_SEARCH_INPUT_SUCCESS,
+    payload: value,
+  }
+}
+
+export const changeSearchInputError = (error) => {
+  return {
+    type: CHANGE_SEARCH_INPUT_ERROR,
+    payload: error,
+  }
+}
+
+export const changeSearchInput = (value) => {
+  return (dispatch) => {
+    try {
+      dispatch(changeSearchInputSuccess(value));
+    } catch (error) {
+      dispatch(changeSearchInputError(error));
     }
   }  
 }

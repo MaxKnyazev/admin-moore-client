@@ -9,9 +9,8 @@ import GuestsSearch from '../GuestsSearch';
 
 function Guests() {
   const dispatch = useDispatch();
-  const { guests } = useSelector(state => state.guestsReducer);
+  const { guests, searchInput } = useSelector(state => state.guestsReducer);
   const guestsIsLoading = useSelector(state => state.guestsReducer.isLoading);
-  const searchInput = ''; //TODO: ЗАГЛУШКА!!!!!!!!!!!!!!
 
   const buttonHandler = () => {
     dispatch(getAllGuestsAsync())
