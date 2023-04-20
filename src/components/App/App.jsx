@@ -163,7 +163,7 @@ function App() {
 
 
         <ul className="guests__list">
-          {guests.filter(guest => guest.name.includes(searchInput)).map(guest => {
+          {guests.filter(guest => `${guest.name}${guest.start_time}`.includes(searchInput)).map(guest => {
             return (
               <li key={guest.id} className={guest.stop_time ? 'guests__wrapper opacity' : 'guests__wrapper'}>
                 <div className="guests__item item">
