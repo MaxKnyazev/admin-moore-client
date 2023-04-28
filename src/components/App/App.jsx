@@ -5,6 +5,7 @@ import { useState } from 'react';
 import React from 'react';
 import Header from '../Header';
 import Guests from '../Guests';
+import Cashbox from '../Cashbox';
 
 function App() {
   const dispatch = useDispatch();
@@ -59,37 +60,7 @@ function App() {
 
       <Guests />
       
-      <section className="cashbox">
-          <div className="cashbox__money">
-            <label htmlFor="noncash">Безналичные:</label>
-            <input className="cashbox__input" placeholder="Non-cash..." type="number" value={cashboxNoncashInput} onChange={e => inputHandler(e, setCashboxNoncashInput)} />
-
-            <label htmlFor="cash">Комментарий:</label>
-            <input className="cashbox__input" placeholder="Comment..." type="number" value={cashboxNoncashComment} onChange={e => inputHandler(e, setCashboxNoncashComment)} />
-
-            <div className="cashbox__buttons">
-              <button className="cashbox__button">Добавить</button>
-              <button className="cashbox__button">Убрать</button>
-            </div>
-          </div>
-          
-          <div className="cashbox__display">
-            18.000
-          </div>
-          
-          <div className="cashbox__money">
-            <label htmlFor="cash">Наличные:</label>
-            <input className="cashbox__input" placeholder="Cash..." type="number" value={cashboxCashInput} onChange={e => inputHandler(e, setCashboxCashInput)} />
-
-            <label htmlFor="cash">Комментарий:</label>
-            <input className="cashbox__input" placeholder="Comment..." type="number" value={cashboxCashComment} onChange={e => inputHandler(e, setCashboxCashComment)} />
-
-            <div className="cashbox__buttons">
-              <button className="cashbox__button">Добавить</button>
-              <button className="cashbox__button">Убрать</button>
-            </div>
-          </div>
-      </section>
+      <Cashbox />
 
       {
         showModal &&
