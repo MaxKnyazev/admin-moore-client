@@ -13,10 +13,6 @@ function App() {
 
   const [ modalCashInput, setModalCashInput ] = useState('');
   const [ modalNoncashInput, setModalNoncashInput ] = useState('');
-  const [ cashboxCashInput, setCashboxCashInput ] = useState('');
-  const [ cashboxCashComment, setCashboxCashComment ] = useState('');
-  const [ cashboxNoncashInput, setCashboxNoncashInput ] = useState('');
-  const [ cashboxNoncashComment, setCashboxNoncashComment ] = useState('');
 
   const inputHandler = (e, setInput) => {
     setInput(e.target.value);
@@ -35,9 +31,6 @@ function App() {
         result_money: null,
       }}
     ))
-
-    setCashboxNoncashInput('');
-    setCashboxCashInput('');
   }
 
   const modalPaymentButtonHandler = () => {
@@ -49,9 +42,6 @@ function App() {
         result_money: +modalCashInput + +modalNoncashInput,
       }}
     ))
-
-    setCashboxNoncashInput('');
-    setCashboxCashInput('');
   }
 
   return (
