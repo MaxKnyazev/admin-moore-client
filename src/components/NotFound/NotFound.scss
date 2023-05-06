@@ -7,4 +7,12 @@
     font-weight: bold;
     font-size: 60px;
   }
+
+  &__button {
+    font-size: 2rem;
+    width: 20vw;
+    border: 3px solid grey;
+    cursor: pointer;
+    background-color: burlywood;
+  }
 }
