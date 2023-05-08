@@ -7,6 +7,7 @@ import { addGuestAsync } from '../../store/guests/guestsActionCreaters';
 function GuestsAdd() {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.authReducer);
+  const { currentShift } = useSelector(state => state.shiftsReducer);
 
   const [ guestName, setGuestName ] = useState('');
   const [ guestTariff, setGuestTariff ] = useState('1');
@@ -29,6 +30,7 @@ function GuestsAdd() {
         name: guestName,
         start_time: createValidTime(startDate),
         tariffs_id: guestTariff,
+        shifts_id: currentShift.id,
       }))
   
       setGuestName('');
