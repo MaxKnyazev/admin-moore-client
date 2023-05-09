@@ -1,6 +1,7 @@
 import { 
   GET_ALL_CASHBOX_LOGS_PENDING, GET_ALL_CASHBOX_LOGS_SUCCESS, GET_ALL_CASHBOX_LOGS_ERROR, 
   ADD_CASHBOX_LOG_PENDING, ADD_CASHBOX_LOG_SUCCESS, ADD_CASHBOX_LOG_ERROR,
+  // CALCULATE_RESULT_MONEY_PENDING, CALCULATE_RESULT_MONEY_SUCCESS, CALCULATE_RESULT_MONEY_ERROR,
 } from './cashboxLogsActionTypes';
 // import { sortGuests } from '../../utils/utils';
 
@@ -8,6 +9,8 @@ const initialState = {
   cashboxLogs: [],
   isLoading: false,
   error: null,
+  // cashbox: 0,
+  // income: 0,
   // showModal: false,
 }
 
@@ -32,6 +35,18 @@ export const cashboxLogsReducer = (state = initialState, action) => {
 
     case ADD_CASHBOX_LOG_ERROR:
       return {...state, isLoading: false, error: action.payload}
+
+
+
+      // case CALCULATE_RESULT_MONEY_PENDING:
+      //   return {...state, isLoading: true}
+      
+      // case CALCULATE_RESULT_MONEY_SUCCESS:
+      //   return {...state, isLoading: false, cashbox: action.payload.cashbox, income: action.payload.income}
+  
+      // case CALCULATE_RESULT_MONEY_ERROR:
+      //   return {...state, isLoading: false, error: action.payload}
+
 
 
 

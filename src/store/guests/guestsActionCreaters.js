@@ -35,7 +35,6 @@ export const getAllGuestsAsync = () => {
 
       const response = await axiosInstance.get('/guests');
       const guests = response.data.guests;
-      console.log(response);
 
       dispatch(getAllGuestsSuccess(guests));
     } catch (error) {
@@ -114,7 +113,6 @@ export const editGuestAsync = ({ id, options }) => {
 
       const response = await axiosInstance.put(`/guests/edit/${id}`, options);
       const guest = response.data.editedGuest;
-      console.log(response);
 
       dispatch(editGuestSuccess({ id, guest }));
     } catch (error) {
@@ -155,7 +153,6 @@ export const calculateMoneyAsync = ({ id, stopTime }) => {
 
       const response = await axiosInstance.put(`/guests/calculate/${id}`, { stopTime });
       const guest = response.data.calculatedGuest;
-      console.log(response);
 
       dispatch(calculateMoneySuccess({ id, guest }));
     } catch (error) {
@@ -196,7 +193,6 @@ export const calculateBreakAsync = ({ id, breakStopTime }) => {
 
       const response = await axiosInstance.put(`/guests/break/${id}`, { breakStopTime });
       const guest = response.data.breakGuest;
-      console.log(response);
 
       dispatch(calculateBreakSuccess({ id, guest }));
     } catch (error) {

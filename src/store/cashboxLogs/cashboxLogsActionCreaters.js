@@ -1,6 +1,7 @@
 import { 
   GET_ALL_CASHBOX_LOGS_PENDING, GET_ALL_CASHBOX_LOGS_SUCCESS, GET_ALL_CASHBOX_LOGS_ERROR, 
-  ADD_CASHBOX_LOG_PENDING, ADD_CASHBOX_LOG_SUCCESS, ADD_CASHBOX_LOG_ERROR, 
+  ADD_CASHBOX_LOG_PENDING, ADD_CASHBOX_LOG_SUCCESS, ADD_CASHBOX_LOG_ERROR,
+  // CALCULATE_RESULT_MONEY_PENDING, CALCULATE_RESULT_MONEY_SUCCESS, CALCULATE_RESULT_MONEY_ERROR,
 } from './cashboxLogsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
 
@@ -75,6 +76,44 @@ export const addCashboxLogAsync = (options) => {
     }
   }  
 }
+
+
+
+// export const calculateResultMoneyPending = () => {
+//   return {
+//     type: CALCULATE_RESULT_MONEY_PENDING,
+//   }
+// }
+
+// export const calculateResultMoneySuccess = (result) => {
+//   return {
+//     type: CALCULATE_RESULT_MONEY_SUCCESS,
+//     payload: result,
+//   }
+// }
+
+// export const calculateResultMoneyError = (error) => {
+//   return {
+//     type: CALCULATE_RESULT_MONEY_ERROR,
+//     payload: error,
+//   }
+// }
+
+// export const calculateResultMoneyAsync = (shiftId) => {
+//   return async (dispatch) => {
+//     try {
+//       dispatch(calculateResultMoneyPending());
+//       let result = {};
+
+//       const response = await axiosInstance.post('/cashbox/add', shiftId);
+//       const cashboxLog = response.data.cashboxLog;
+
+//       dispatch(calculateResultMoneySuccess(result));
+//     } catch (error) {
+//       dispatch(calculateResultMoneyError(error));
+//     }
+//   }  
+// }
 
 
 

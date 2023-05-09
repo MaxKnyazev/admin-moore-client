@@ -1,5 +1,6 @@
 import './Guests.scss';
 import { getAllGuestsAsync, editGuestAsync, calculateMoneyAsync, calculateBreakAsync } from '../../store/guests/guestsActionCreaters';
+import { calculateResultMoneyAsync } from '../../store/shifts/shiftsActionCreaters';
 import { useSelector, useDispatch } from 'react-redux';
 import { createValidTime } from '../../utils/utils';
 import React from 'react';
@@ -13,7 +14,8 @@ function Guests() {
   const guestsIsLoading = useSelector(state => state.guestsReducer.isLoading);
 
   const buttonHandler = () => {
-    dispatch(getAllGuestsAsync())
+    dispatch(getAllGuestsAsync());
+    dispatch(calculateResultMoneyAsync('ff8ce162-537a-4b9e-8e78-d0aac137fa18'));
   }
 
 
