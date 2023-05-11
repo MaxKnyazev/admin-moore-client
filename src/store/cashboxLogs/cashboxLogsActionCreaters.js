@@ -4,6 +4,7 @@ import {
   // CALCULATE_RESULT_MONEY_PENDING, CALCULATE_RESULT_MONEY_SUCCESS, CALCULATE_RESULT_MONEY_ERROR,
 } from './cashboxLogsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
+import { calculateResultMoneyAsync } from '../shifts/shiftsActionCreaters';
 
 export const getAllCashboxLogsPending = () => {
   return {
@@ -71,6 +72,7 @@ export const addCashboxLogAsync = (options) => {
       const cashboxLog = response.data.cashboxLog;
 
       dispatch(addCashboxLogSuccess(cashboxLog));
+      dispatch(calculateResultMoneyAsync(cashboxLog.shifts_id));
     } catch (error) {
       dispatch(addCashboxLogError(error));
     }

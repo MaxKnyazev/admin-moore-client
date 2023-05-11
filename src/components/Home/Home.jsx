@@ -42,6 +42,7 @@ const Home = () => {
         result_money: +modalCashInput + +modalNoncashInput,
       }}
     ))
+    
   }
 
   return (

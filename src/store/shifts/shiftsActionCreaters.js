@@ -79,6 +79,8 @@ export const calculateResultMoneyAsync = (shiftId) => {
       const { cashboxLogsByShiftsId } = cashboxResponse.data;
       const { guestsByShiftsId } = guestsResponse.data;
 
+      console.log(cashboxLogsByShiftsId);
+
       for (let elem of cashboxLogsByShiftsId) {
         result.cashbox += +elem.input_cash;
         result.cashbox -= +elem.output_cash;
@@ -94,11 +96,6 @@ export const calculateResultMoneyAsync = (shiftId) => {
 
         result.income += +elem.result_money;
       }
-
-      console.log(cashboxLogsByShiftsId);
-      console.log(guestsByShiftsId);
-
-      console.log(result);
 
       dispatch(calculateResultMoneySuccess(result));
     } catch (error) {

@@ -7,6 +7,7 @@ import {
   CHANGE_SEARCH_INPUT_SUCCESS, CHANGE_SEARCH_INPUT_ERROR,
 } from './guestsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
+import { calculateResultMoneyAsync } from '../shifts/shiftsActionCreaters';
 
 export const getAllGuestsPending = () => {
   return {
@@ -115,6 +116,7 @@ export const editGuestAsync = ({ id, options }) => {
       const guest = response.data.editedGuest;
 
       dispatch(editGuestSuccess({ id, guest }));
+      dispatch(calculateResultMoneyAsync(guest.shifts_id));
     } catch (error) {
       dispatch(editGuestError(error));
     }

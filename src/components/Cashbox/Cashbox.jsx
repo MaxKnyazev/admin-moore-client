@@ -8,6 +8,7 @@ import React from 'react';
 function Cashbox() {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.authReducer);
+  const { currentShift } = useSelector(state => state.shiftsReducer);
 
   const [ cashboxMoneyInput, setCashboxMoneyInput ] = useState('');
   const [ cashboxCommentInput, setCashboxCommentInput ] = useState('');
@@ -33,8 +34,10 @@ function Cashbox() {
       users_name: user.name,
       description: cashboxCommentInput,
       time: createValidTime(date),
-      shifts_id: 'c106b339-b923-4ade-9b98-e5b7d56c91e1',
+      shifts_id: currentShift.id,
     }))
+    setCashboxCommentInput('');
+    setCashboxMoneyInput('');
   }
 
   const cashboxRadioButtonHandler = (moneyTypeFromInput) => {

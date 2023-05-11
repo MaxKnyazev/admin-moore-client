@@ -11,11 +11,12 @@ import GuestsSearch from '../GuestsSearch';
 function Guests() {
   const dispatch = useDispatch();
   const { guests, searchInput } = useSelector(state => state.guestsReducer);
+  const { currentShift } = useSelector(state => state.shiftsReducer);
   const guestsIsLoading = useSelector(state => state.guestsReducer.isLoading);
 
   const buttonHandler = () => {
     dispatch(getAllGuestsAsync());
-    dispatch(calculateResultMoneyAsync('ff8ce162-537a-4b9e-8e78-d0aac137fa18'));
+    dispatch(calculateResultMoneyAsync(currentShift.id));
   }
 
 
