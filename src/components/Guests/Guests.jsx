@@ -20,15 +20,15 @@ function Guests() {
 
 
 // *********************************************************** 2023-05-12
-const fetchData = useCallback(async () => {
+const preloadData = useCallback(async () => {
   dispatch(getAllGuestsAsync());
   dispatch(calculateResultMoneyAsync(currentShift.id));
 }, [dispatch, currentShift.id])
 
 useEffect(() => {
-  fetchData()
+  preloadData()
     .catch(console.error);;
-}, [fetchData])
+}, [preloadData])
 // *********************************************************** 2023-05-12
 
 
