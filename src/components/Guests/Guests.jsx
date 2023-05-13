@@ -1,5 +1,5 @@
 import './Guests.scss';
-import { getAllGuestsAsync, editGuestAsync, calculateMoneyAsync, calculateBreakAsync } from '../../store/guests/guestsActionCreaters';
+import { getAllGuestsAsync, getGuestsByShiftsIdAsync, editGuestAsync, calculateMoneyAsync, calculateBreakAsync } from '../../store/guests/guestsActionCreaters';
 import { calculateResultMoneyAsync } from '../../store/shifts/shiftsActionCreaters';
 import { useSelector, useDispatch } from 'react-redux';
 import { createValidTime } from '../../utils/utils';
@@ -21,7 +21,7 @@ function Guests() {
 
 // *********************************************************** 2023-05-12
 const preloadData = useCallback(async () => {
-  dispatch(getAllGuestsAsync());
+  dispatch(getGuestsByShiftsIdAsync(currentShift.id));
   dispatch(calculateResultMoneyAsync(currentShift.id));
 }, [dispatch, currentShift.id])
 
@@ -36,7 +36,7 @@ useEffect(() => {
 
 
   const buttonHandler = () => {
-    dispatch(getAllGuestsAsync());
+    dispatch(getGuestsByShiftsIdAsync(currentShift.id));
     dispatch(calculateResultMoneyAsync(currentShift.id));
   }
 

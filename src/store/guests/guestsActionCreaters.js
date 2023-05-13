@@ -1,5 +1,6 @@
 import { 
   GET_ALL_GUESTS_PENDING, GET_ALL_GUESTS_SUCCESS, GET_ALL_GUESTS_ERROR, 
+  GET_GUESTS_BY_SHIFTS_ID_PENDING, GET_GUESTS_BY_SHIFTS_ID_SUCCESS, GET_GUESTS_BY_SHIFTS_ID_ERROR,
   ADD_GUEST_PENDING, ADD_GUEST_SUCCESS, ADD_GUEST_ERROR,
   EDIT_GUEST_PENDING, EDIT_GUEST_SUCCESS, EDIT_GUEST_ERROR,
   CALCULATE_MONEY_PENDING, CALCULATE_MONEY_SUCCESS, CALCULATE_MONEY_ERROR,
@@ -40,6 +41,43 @@ export const getAllGuestsAsync = () => {
       dispatch(getAllGuestsSuccess(guests));
     } catch (error) {
       dispatch(getAllGuestsError(error));
+    }
+  }  
+}
+
+
+
+export const getGuestsByShiftsIdPending = () => {
+  return {
+    type: GET_GUESTS_BY_SHIFTS_ID_PENDING,
+  }
+}
+
+export const getGuestsByShiftsIdSuccess = (guests) => {
+  return {
+    type: GET_GUESTS_BY_SHIFTS_ID_SUCCESS,
+    payload: guests,
+  }
+}
+
+export const getGuestsByShiftsIdError = (error) => {
+  return {
+    type: GET_GUESTS_BY_SHIFTS_ID_ERROR,
+    payload: error,
+  }
+}
+
+export const getGuestsByShiftsIdAsync = (shiftsId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(getGuestsByShiftsIdPending());
+
+      const response = await axiosInstance.get(`/guests/getByShiftsId/${shiftsId}`);
+      const { guestsByShiftsId } = response.data;
+
+      dispatch(getGuestsByShiftsIdSuccess(guestsByShiftsId));
+    } catch (error) {
+      dispatch(getGuestsByShiftsIdError(error));
     }
   }  
 }
