@@ -4,6 +4,7 @@ import { calculateResultMoneyAsync } from '../../store/shifts/shiftsActionCreate
 import { useSelector, useDispatch } from 'react-redux';
 import { createValidTime } from '../../utils/utils';
 import React from 'react';
+import {useCallback, useEffect} from 'react';
 import GuestsLoader from '../GuestsLoader';
 import GuestsAdd from '../GuestsAdd';
 import GuestsSearch from '../GuestsSearch';
@@ -13,6 +14,26 @@ function Guests() {
   const { guests, searchInput } = useSelector(state => state.guestsReducer);
   const { currentShift } = useSelector(state => state.shiftsReducer);
   const guestsIsLoading = useSelector(state => state.guestsReducer.isLoading);
+
+
+
+
+
+// *********************************************************** 2023-05-12
+const preloadData = useCallback(async () => {
+  dispatch(getAllGuestsAsync());
+  dispatch(calculateResultMoneyAsync(currentShift.id));
+}, [dispatch, currentShift.id])
+
+useEffect(() => {
+  preloadData()
+    .catch(console.error);;
+}, [preloadData])
+// *********************************************************** 2023-05-12
+
+
+
+
 
   const buttonHandler = () => {
     dispatch(getAllGuestsAsync());
