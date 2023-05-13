@@ -5,8 +5,15 @@
   align-items: center;
   height: 10vh;
 
-  &__cashbox {
+  &__span {
     font-size: 30px;
     margin-left: 3rem;
+  }
+
+  &__guests {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 }
