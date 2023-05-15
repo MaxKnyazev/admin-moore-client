@@ -1,22 +1,21 @@
 import './Guests.scss';
-import { getAllGuestsAsync, getGuestsByShiftsIdAsync, editGuestAsync, calculateMoneyAsync, calculateBreakAsync } from '../../store/guests/guestsActionCreaters';
+import { getGuestsByShiftsIdAsync, editGuestAsync, calculateMoneyAsync, calculateBreakAsync } from '../../store/guests/guestsActionCreaters';
 import { calculateResultMoneyAsync } from '../../store/shifts/shiftsActionCreaters';
 import { useSelector, useDispatch } from 'react-redux';
 import { createValidTime } from '../../utils/utils';
 import React from 'react';
-import {useCallback, useEffect} from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import GuestsLoader from '../GuestsLoader';
 import GuestsAdd from '../GuestsAdd';
 import GuestsSearch from '../GuestsSearch';
+import GuestsPaymentModal from '../GuestsPaymentModal';
 
 function Guests() {
   const dispatch = useDispatch();
   const { guests, searchInput } = useSelector(state => state.guestsReducer);
   const { currentShift } = useSelector(state => state.shiftsReducer);
+  const { showModal } = useSelector(state => state.guestsReducer);
   const guestsIsLoading = useSelector(state => state.guestsReducer.isLoading);
-
-
-
 
 
 // *********************************************************** 2023-05-12
@@ -31,15 +30,10 @@ useEffect(() => {
 }, [preloadData])
 // *********************************************************** 2023-05-12
 
-
-
-
-
   const buttonHandler = () => {
     dispatch(getGuestsByShiftsIdAsync(currentShift.id));
     dispatch(calculateResultMoneyAsync(currentShift.id));
   }
-
 
   const calculateButtonHandler = async (guest) => {
     const stopDate = new Date();
@@ -67,7 +61,6 @@ useEffect(() => {
       ))
     }
   }
-
 
   return (
     <section className="guests">
@@ -127,6 +120,8 @@ useEffect(() => {
           )
         })}
       </ul>
+
+      { showModal && <GuestsPaymentModal /> }
     </section>
   )
 }

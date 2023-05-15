@@ -1,28 +1,32 @@
-.test {
-  &__button {
-    min-width: 8vw;
-    min-height: 3vh;
-    background-color: #8d8d8d;
-    margin: 2vh 0 1vh 0;
-  }
-}
-
-.opacity {
-  opacity: 0.5;
-}
-
-// ****************************************************************
-.cashbox {
+.paymentModal {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2vh;
 
-  &__money {
+  &__wrapper {
+    width: 50vw;
+    height: 50vh;
+    background-color: #fff;
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  &__description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 3vh;
   }
 
   &__input {
@@ -31,11 +35,6 @@
     background-color: #dbdbdb;
     padding-left: 10px;
     margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  &__buttons {
-
   }
 
   &__button {
@@ -43,11 +42,5 @@
     min-width: 8vw;
     min-height: 3vh;
     background-color: #8d8d8d;
-  }
-
-  &__display {
-    margin: 0 3vw 0 3vw;
-    font-weight: bold;
-    font-size: 30px;
   }
 }
