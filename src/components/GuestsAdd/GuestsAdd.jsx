@@ -2,7 +2,7 @@ import './GuestsAdd.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { createValidDate, createValidTime } from '../../utils/utils';
-import { addGuestAsync } from '../../store/guests/guestsActionCreaters';
+import { addGuestAsync, toggleShowAddGroupModal } from '../../store/guests/guestsActionCreaters';
 
 function GuestsAdd() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function GuestsAdd() {
     setGuestTariff(e.target.value);
   }
 
-  const formButtonHandler = () => {
+  const buttonAddGuestHandler = () => {
     if (guestName) {
       const startDate = new Date();
       dispatch(addGuestAsync({
@@ -37,6 +37,10 @@ function GuestsAdd() {
     }
   }
 
+  const buttonAddGroupHandler = () => {
+    dispatch(toggleShowAddGroupModal());
+  }
+
   return (
     <div className="guests__form form">
       <select defaultValue="1" onChange={formTariffHandler} className="form__tariff" name="tariff">
@@ -45,7 +49,8 @@ function GuestsAdd() {
       </select>
 
       <input className="form__input" placeholder="Guest name..." type="text" value={guestName} onChange={e => inputHandler(e, setGuestName)} />
-      <button className="form__button" onClick={formButtonHandler}>Add guest</button>
+      <button className="form__button" onClick={buttonAddGuestHandler}>Add guest</button>
+      <button className="form__button form__button--group" onClick={buttonAddGroupHandler}>Add group</button>
     </div>
   )
 }

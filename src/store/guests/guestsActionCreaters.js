@@ -6,6 +6,7 @@ import {
   CALCULATE_MONEY_PENDING, CALCULATE_MONEY_SUCCESS, CALCULATE_MONEY_ERROR,
   CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
   CHANGE_SEARCH_INPUT_SUCCESS, CHANGE_SEARCH_INPUT_ERROR,
+  TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
 } from './guestsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
 import { calculateResultMoneyAsync } from '../shifts/shiftsActionCreaters';
@@ -263,6 +264,31 @@ export const changeSearchInput = (value) => {
       dispatch(changeSearchInputSuccess(value));
     } catch (error) {
       dispatch(changeSearchInputError(error));
+    }
+  }  
+}
+
+
+
+export const toggleShowAddGroupModalSuccess = () => {
+  return {
+    type: TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS,
+  }
+}
+
+export const toggleShowAddGroupModalError = (error) => {
+  return {
+    type: TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
+    payload: error,
+  }
+}
+
+export const toggleShowAddGroupModal = () => {
+  return (dispatch) => {
+    try {
+      dispatch(toggleShowAddGroupModalSuccess());
+    } catch (error) {
+      dispatch(toggleShowAddGroupModalError(error));
     }
   }  
 }

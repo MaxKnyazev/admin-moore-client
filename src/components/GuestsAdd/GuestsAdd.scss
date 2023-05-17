@@ -23,6 +23,10 @@
       min-width: 8vw;
       min-height: 3vh;
       background-color: #8d8d8d;
+
+      &--group {
+        background-color: #afafaf;
+      }
     }
   }
 }
