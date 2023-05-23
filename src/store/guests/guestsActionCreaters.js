@@ -2,6 +2,7 @@ import {
   GET_ALL_GUESTS_PENDING, GET_ALL_GUESTS_SUCCESS, GET_ALL_GUESTS_ERROR, 
   GET_GUESTS_BY_SHIFTS_ID_PENDING, GET_GUESTS_BY_SHIFTS_ID_SUCCESS, GET_GUESTS_BY_SHIFTS_ID_ERROR,
   ADD_GUEST_PENDING, ADD_GUEST_SUCCESS, ADD_GUEST_ERROR,
+  ADD_GROUP_PENDING, ADD_GROUP_SUCCESS, ADD_GROUP_ERROR,
   EDIT_GUEST_PENDING, EDIT_GUEST_SUCCESS, EDIT_GUEST_ERROR,
   CALCULATE_MONEY_PENDING, CALCULATE_MONEY_SUCCESS, CALCULATE_MONEY_ERROR,
   CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
@@ -117,6 +118,43 @@ export const addGuestAsync = (options) => {
       dispatch(addGuestSuccess(guest));
     } catch (error) {
       dispatch(addGuestError(error));
+    }
+  }  
+}
+
+
+
+export const addGroupPending = () => {
+  return {
+    type: ADD_GROUP_PENDING,
+  }
+}
+
+export const addGroupSuccess = (guest) => {
+  return {
+    type: ADD_GROUP_SUCCESS,
+    payload: guest,
+  }
+}
+
+export const addGroupError = (error) => {
+  return {
+    type: ADD_GROUP_ERROR,
+    payload: error,
+  }
+}
+
+export const addGroupAsync = (options) => {
+  return async (dispatch) => {
+    try {
+      dispatch(addGroupPending());
+
+      const response = await axiosInstance.post('/guests/addGroup', options);
+      const group = response.data.group;
+
+      dispatch(addGroupSuccess(group));
+    } catch (error) {
+      dispatch(addGroupError(error));
     }
   }  
 }

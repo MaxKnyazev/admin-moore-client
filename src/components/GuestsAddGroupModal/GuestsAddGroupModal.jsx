@@ -1,12 +1,15 @@
 import './GuestsAddGroupModal.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { editGuestAsync, toggleShowAddGroupModal } from '../../store/guests/guestsActionCreaters';
+import { addGroupAsync, toggleShowAddGroupModal } from '../../store/guests/guestsActionCreaters';
+import { createValidDate, createValidTime } from '../../utils/utils';
 
 function GuestsAddGroupModal() {
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.authReducer);
+  const { currentShift } = useSelector(state => state.shiftsReducer);
   const [ inputGroupName, setInputGroupName ] = useState('');
-  const [ group, setGroup ] = useState([]);
+  const [ guestsList, setGuestsList ] = useState([]);
 
   const inputHandler = (e, setInput) => {
     setInput(e.target.value);
@@ -17,14 +20,39 @@ function GuestsAddGroupModal() {
   }
 
   const addToGroupButtonHandler = () => {
-    setGroup([...group, {
+    setGuestsList([...guestsList, {
       tariff: '1',
       id: Date.now()
     }])
   }
 
   const deleteGuestButtonHandler = (id) => {
-    setGroup(group.filter(elem => elem.id !== id))
+    setGuestsList(guestsList.filter(elem => elem.id !== id))
+  }
+
+  const addGroupButtonHandler = () => {
+    if (inputGroupName) {
+      const startDate = new Date();
+      const group = [];
+      for (const guest of guestsList) {
+        group.push({
+          date: createValidDate(startDate),
+          users_id: user.id,
+          users_name: user.name,
+          name: `${inputGroupName} +1`,
+          group_name: inputGroupName,
+          start_time: createValidTime(startDate),
+          tariffs_id: guest.tariff,
+          shifts_id: currentShift.id,
+        })
+      }
+      dispatch(addGroupAsync(group));
+      dispatch(toggleShowAddGroupModal());
+    }
+  }
+
+  const itemTariffHandler = (e, id) => {
+    setGuestsList(guestsList.map(elem => elem.id === id ? { ...elem, tariff: e.target.value } : elem))
   }
 
   let count = 0;
@@ -39,11 +67,11 @@ function GuestsAddGroupModal() {
         </div>
 
         <ul className="addGroupModal__list">
-          {group.map(elem => {
+          {guestsList.map(elem => {
             count += 1;
             return (
               <li key={elem.id} className="addGroupModal__item item">
-                <select className="item__tariff" defaultValue={elem.tariff} onChange={() => {}} name="tariff">
+                <select className="item__tariff" defaultValue={elem.tariff} onChange={e => {itemTariffHandler(e, elem.id)}} name="tariff">
                   <option value="1">Взрослый</option>
                   <option value="2">Детский</option>
                 </select>
@@ -58,7 +86,7 @@ function GuestsAddGroupModal() {
 
         <div className="addGroupModal__buttons">
           <button className="addGroupModal__button" onClick={cancelButtonHandler}>Отмена</button>
-          <button className="addGroupModal__button" onClick={() => {}}>Добавить группу</button>
+          <button className="addGroupModal__button" onClick={addGroupButtonHandler}>Добавить группу</button>
         </div>
       </div>
     </section>
