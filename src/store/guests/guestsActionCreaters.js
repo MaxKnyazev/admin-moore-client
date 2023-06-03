@@ -8,6 +8,8 @@ import {
   CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
   CHANGE_SEARCH_INPUT_SUCCESS, CHANGE_SEARCH_INPUT_ERROR,
   TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
+  TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR,
+  SET_CURRENT_GROUP_PENDING, SET_CURRENT_GROUP_SUCCESS, SET_CURRENT_GROUP_ERROR,
 } from './guestsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
 import { calculateResultMoneyAsync } from '../shifts/shiftsActionCreaters';
@@ -327,6 +329,68 @@ export const toggleShowAddGroupModal = () => {
       dispatch(toggleShowAddGroupModalSuccess());
     } catch (error) {
       dispatch(toggleShowAddGroupModalError(error));
+    }
+  }  
+}
+
+
+
+export const toggleShowPaymentGroupModalSuccess = () => {
+  return {
+    type: TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS,
+  }
+}
+
+export const toggleShowPaymentGroupModalError = (error) => {
+  return {
+    type: TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR,
+    payload: error,
+  }
+}
+
+export const toggleShowPaymentGroupModal = () => {
+  return (dispatch) => {
+    try {
+      dispatch(toggleShowPaymentGroupModalSuccess());
+    } catch (error) {
+      dispatch(toggleShowPaymentGroupModalError(error));
+    }
+  }  
+}
+
+
+
+export const setCurrentGroupPending = () => {
+  return {
+    type: SET_CURRENT_GROUP_PENDING,
+  }
+}
+
+export const setCurrentGroupSuccess = (group) => {
+  return {
+    type: SET_CURRENT_GROUP_SUCCESS,
+    payload: group,
+  }
+}
+
+export const setCurrentGroupError = (error) => {
+  return {
+    type: SET_CURRENT_GROUP_ERROR,
+    payload: error,
+  }
+}
+
+export const setCurrentGroupAsync = (groupId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setCurrentGroupPending());
+
+      const response = await axiosInstance.get(`/guests/getByGroupId/${groupId}`);
+      const group = response.data.guestsByGroupId;
+
+      dispatch(setCurrentGroupSuccess(group));
+    } catch (error) {
+      dispatch(setCurrentGroupError(error));
     }
   }  
 }

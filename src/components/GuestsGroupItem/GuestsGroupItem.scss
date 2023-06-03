@@ -1,6 +1,9 @@
 .guests {
-  .item--additional {
-    background-color: rgb(192, 192, 192);
+  .group--additional {
+    background-color: rgb(165, 204, 219);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__wrapper {
@@ -8,23 +11,26 @@
     margin-bottom: 2vh;
   }
 
-  &__item {
+  &__group {
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-width: 50vw;
     min-height: 3vh;
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(203, 240, 255);
 
-    &--group {
-      background-color: rgb(156, 206, 226);
-    }
-
-    .item {
+    .group {
       &__button {
         min-width: 8vw;
         min-height: 3vh;
-        background-color: #8d8d8d;
+        background-color: rgb(51 140 175);
+        color: white;
+      }
+
+        
+      &__name {
+        font-weight: bold;
+        color: rgb(58, 58, 58);
       }
     }
   }

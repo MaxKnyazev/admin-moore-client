@@ -1,7 +1,7 @@
 import './GuestsPaymentModal.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { editGuestAsync } from '../../store/guests/guestsActionCreaters';
+import { editGuestAsync, setCurrentGroupAsync } from '../../store/guests/guestsActionCreaters';
 
 function GuestsPaymentModal() {
   const dispatch = useDispatch();
@@ -39,6 +39,11 @@ function GuestsPaymentModal() {
         result_money: +modalCashInput + +modalNoncashInput,
       }}
     ))
+
+    if (currentGuest.group_id) {
+      dispatch(setCurrentGroupAsync(currentGuest.group_id));
+    }
+
     setModalCashInput('');
     setModalNoncashInput('');
   }

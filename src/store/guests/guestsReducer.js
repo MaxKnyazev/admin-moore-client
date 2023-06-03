@@ -8,17 +8,21 @@ import {
   CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
   CHANGE_SEARCH_INPUT_SUCCESS, CHANGE_SEARCH_INPUT_ERROR,
   TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
+  TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR,
+  SET_CURRENT_GROUP_PENDING, SET_CURRENT_GROUP_SUCCESS, SET_CURRENT_GROUP_ERROR,
 } from './guestsActionTypes';
 import { sortGuests } from '../../utils/utils';
 
 const initialState = {
+  error: null,
   guests: [],
   currentGuest: {},
   isLoading: false,
-  error: null,
+  searchInput: '',
   showPaymentModal: false,
   showAddGroupModal: false,
-  searchInput: '',
+  showPaymentGroupModal: false,
+  currentGroup: [],
 }
 
 export const guestsReducer = (state = initialState, action) => {
@@ -133,6 +137,25 @@ export const guestsReducer = (state = initialState, action) => {
 
     case TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR:
         return {...state, error: action.payload}
+
+
+
+    case TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS:
+      return {...state, showPaymentGroupModal: !state.showPaymentGroupModal}
+
+    case TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR:
+        return {...state, error: action.payload}
+
+    
+
+    case SET_CURRENT_GROUP_PENDING:
+      return {...state, isLoading: true}
+    
+    case SET_CURRENT_GROUP_SUCCESS:
+      return {...state, isLoading: false, currentGroup: sortGuests(action.payload)}
+
+    case SET_CURRENT_GROUP_ERROR:
+      return {...state, isLoading: false, error: action.payload}
 
 
 

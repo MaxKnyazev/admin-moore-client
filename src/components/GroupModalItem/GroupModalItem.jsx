@@ -1,12 +1,11 @@
-import './GuestsItem.scss';
-import { editGuestAsync, calculateMoneyAsync, calculateBreakAsync } from '../../store/guests/guestsActionCreaters';
+import './GroupModalItem.scss';
+import { editGuestAsync, calculateMoneyAsync, calculateBreakAsync, setCurrentGroupAsync } from '../../store/guests/guestsActionCreaters';
 import { useDispatch } from 'react-redux';
 import { createValidTime } from '../../utils/utils';
 import React from 'react';
 
-function GuestsItem({guest}) {
+function GroupModalItem({ guest }) {
   const dispatch = useDispatch();
-
   const calculateButtonHandler = async (guest) => {
     const stopDate = new Date();
     dispatch(calculateMoneyAsync({
@@ -32,6 +31,7 @@ function GuestsItem({guest}) {
         }}
       ))
     }
+    dispatch(setCurrentGroupAsync(guest.group_id))
   }
 
   return (
@@ -72,4 +72,4 @@ function GuestsItem({guest}) {
   )
 }
 
-export default GuestsItem;
+export default GroupModalItem;
