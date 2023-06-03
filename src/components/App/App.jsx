@@ -35,8 +35,4 @@ const App = () => {
         <Route path='*' element={<NotFoundPage />}/>
       </Route>
     </Routes>
-  );
-}
-
-
 export default App;
