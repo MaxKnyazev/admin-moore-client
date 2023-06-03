@@ -1,0 +1,19 @@
+.header {
+  background-color: rgb(204, 204, 204);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+
+  &__span {
+    font-size: 30px;
+    margin-left: 3rem;
+  }
+
+  &__guests {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}

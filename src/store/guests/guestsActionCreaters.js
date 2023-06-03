@@ -1,11 +1,16 @@
 import { 
   GET_ALL_GUESTS_PENDING, GET_ALL_GUESTS_SUCCESS, GET_ALL_GUESTS_ERROR, 
+  GET_GUESTS_BY_SHIFTS_ID_PENDING, GET_GUESTS_BY_SHIFTS_ID_SUCCESS, GET_GUESTS_BY_SHIFTS_ID_ERROR,
   ADD_GUEST_PENDING, ADD_GUEST_SUCCESS, ADD_GUEST_ERROR,
+  ADD_GROUP_PENDING, ADD_GROUP_SUCCESS, ADD_GROUP_ERROR,
   EDIT_GUEST_PENDING, EDIT_GUEST_SUCCESS, EDIT_GUEST_ERROR,
   CALCULATE_MONEY_PENDING, CALCULATE_MONEY_SUCCESS, CALCULATE_MONEY_ERROR,
   CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
+  CHANGE_SEARCH_INPUT_SUCCESS, CHANGE_SEARCH_INPUT_ERROR,
+  TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
 } from './guestsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
+import { calculateResultMoneyAsync } from '../shifts/shiftsActionCreaters';
 
 export const getAllGuestsPending = () => {
   return {
@@ -34,11 +39,47 @@ export const getAllGuestsAsync = () => {
 
       const response = await axiosInstance.get('/guests');
       const guests = response.data.guests;
-      console.log(response);
 
       dispatch(getAllGuestsSuccess(guests));
     } catch (error) {
       dispatch(getAllGuestsError(error));
+    }
+  }  
+}
+
+
+
+export const getGuestsByShiftsIdPending = () => {
+  return {
+    type: GET_GUESTS_BY_SHIFTS_ID_PENDING,
+  }
+}
+
+export const getGuestsByShiftsIdSuccess = (guests) => {
+  return {
+    type: GET_GUESTS_BY_SHIFTS_ID_SUCCESS,
+    payload: guests,
+  }
+}
+
+export const getGuestsByShiftsIdError = (error) => {
+  return {
+    type: GET_GUESTS_BY_SHIFTS_ID_ERROR,
+    payload: error,
+  }
+}
+
+export const getGuestsByShiftsIdAsync = (shiftsId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(getGuestsByShiftsIdPending());
+
+      const response = await axiosInstance.get(`/guests/getByShiftsId/${shiftsId}`);
+      const { guestsByShiftsId } = response.data;
+
+      dispatch(getGuestsByShiftsIdSuccess(guestsByShiftsId));
+    } catch (error) {
+      dispatch(getGuestsByShiftsIdError(error));
     }
   }  
 }
@@ -83,6 +124,43 @@ export const addGuestAsync = (options) => {
 
 
 
+export const addGroupPending = () => {
+  return {
+    type: ADD_GROUP_PENDING,
+  }
+}
+
+export const addGroupSuccess = (guest) => {
+  return {
+    type: ADD_GROUP_SUCCESS,
+    payload: guest,
+  }
+}
+
+export const addGroupError = (error) => {
+  return {
+    type: ADD_GROUP_ERROR,
+    payload: error,
+  }
+}
+
+export const addGroupAsync = (options) => {
+  return async (dispatch) => {
+    try {
+      dispatch(addGroupPending());
+
+      const response = await axiosInstance.post('/guests/addGroup', options);
+      const group = response.data.group;
+
+      dispatch(addGroupSuccess(group));
+    } catch (error) {
+      dispatch(addGroupError(error));
+    }
+  }  
+}
+
+
+
 export const editGuestPending = () => {
   return {
     type: EDIT_GUEST_PENDING,
@@ -113,9 +191,9 @@ export const editGuestAsync = ({ id, options }) => {
 
       const response = await axiosInstance.put(`/guests/edit/${id}`, options);
       const guest = response.data.editedGuest;
-      console.log(response);
 
       dispatch(editGuestSuccess({ id, guest }));
+      dispatch(calculateResultMoneyAsync(guest.shifts_id));
     } catch (error) {
       dispatch(editGuestError(error));
     }
@@ -154,7 +232,6 @@ export const calculateMoneyAsync = ({ id, stopTime }) => {
 
       const response = await axiosInstance.put(`/guests/calculate/${id}`, { stopTime });
       const guest = response.data.calculatedGuest;
-      console.log(response);
 
       dispatch(calculateMoneySuccess({ id, guest }));
     } catch (error) {
@@ -193,18 +270,63 @@ export const calculateBreakAsync = ({ id, breakStopTime }) => {
     try {
       dispatch(calculateBreakPending());
 
-      // console.log(`************************************************`)
-      // console.log(breakStopTime);
-      // console.log(typeof breakStopTime);
-      // console.log(`************************************************`)
-
       const response = await axiosInstance.put(`/guests/break/${id}`, { breakStopTime });
       const guest = response.data.breakGuest;
-      console.log(response);
 
       dispatch(calculateBreakSuccess({ id, guest }));
     } catch (error) {
       dispatch(calculateBreakError(error));
+    }
+  }  
+}
+
+
+
+export const changeSearchInputSuccess = (value) => {
+  return {
+    type: CHANGE_SEARCH_INPUT_SUCCESS,
+    payload: value,
+  }
+}
+
+export const changeSearchInputError = (error) => {
+  return {
+    type: CHANGE_SEARCH_INPUT_ERROR,
+    payload: error,
+  }
+}
+
+export const changeSearchInput = (value) => {
+  return (dispatch) => {
+    try {
+      dispatch(changeSearchInputSuccess(value));
+    } catch (error) {
+      dispatch(changeSearchInputError(error));
+    }
+  }  
+}
+
+
+
+export const toggleShowAddGroupModalSuccess = () => {
+  return {
+    type: TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS,
+  }
+}
+
+export const toggleShowAddGroupModalError = (error) => {
+  return {
+    type: TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
+    payload: error,
+  }
+}
+
+export const toggleShowAddGroupModal = () => {
+  return (dispatch) => {
+    try {
+      dispatch(toggleShowAddGroupModalSuccess());
+    } catch (error) {
+      dispatch(toggleShowAddGroupModalError(error));
     }
   }  
 }
