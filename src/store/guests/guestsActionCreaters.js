@@ -187,6 +187,9 @@ export const editGuestError = (error) => {
 }
 
 export const editGuestAsync = ({ id, options }) => {
+//*************************************************************************** 2023-06-07 */
+console.log(`guestsActionCreaters --> editGuestAsync (${id}, ${options.toString()})`);
+//*************************************************************************** 2023-06-07 */
   return async (dispatch) => {
     try {
       dispatch(editGuestPending());
@@ -227,7 +230,13 @@ export const calculateMoneyError = (error) => {
   }
 }
 
+//*************************************************************************** 2023-06-07 */
+
 export const calculateMoneyAsync = ({ id, stopTime }) => {
+  //*************************************************************************** 2023-06-07 */
+console.log(`guestsActionCreaters --> calculateMoneyAsync (${id}, ${stopTime})`);
+//*************************************************************************** 2023-06-07 */
+
   return async (dispatch) => {
     try {
       dispatch(calculateMoneyPending());
@@ -242,6 +251,7 @@ export const calculateMoneyAsync = ({ id, stopTime }) => {
   }  
 }
 
+//*************************************************************************** 2023-06-07 */
 
 
 export const calculateBreakPending = () => {

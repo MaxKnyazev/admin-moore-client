@@ -14,6 +14,7 @@ function GuestsPaymentModal() {
   }
 
   const modalCancelButtonHandler = () => {
+//*************************************************************************** 2023-06-07 */
     dispatch(editGuestAsync({
       id: currentGuest.id, 
       options: {
@@ -26,6 +27,8 @@ function GuestsPaymentModal() {
         result_money: null,
       }}
     ))
+//*************************************************************************** 2023-06-07 */
+
     setModalCashInput('');
     setModalNoncashInput('');
   }
@@ -60,11 +63,22 @@ function GuestsPaymentModal() {
         </div>
 
         <label htmlFor="">Наличные:</label>
-        <input type="number" placeholder="Cash..." className="paymentModal__input" value={modalCashInput} onChange={e => {inputHandler(e, setModalCashInput)}} />
+        <input 
+          type="number" 
+          placeholder="Cash..." 
+          className="paymentModal__input" 
+          value={modalCashInput} 
+          onChange={e => {inputHandler(e, setModalCashInput)}} 
+        />
 
         <label htmlFor="">Безналичные:</label>
-        <input type="number" placeholder="Non-cash..." className="paymentModal__input" value={modalNoncashInput} onChange={e => {inputHandler(e, setModalNoncashInput)}} />
-
+        <input 
+          type="number" 
+          placeholder="Non-cash..." 
+          className="paymentModal__input" 
+          value={modalNoncashInput} 
+          onChange={e => {inputHandler(e, setModalNoncashInput)}} 
+        />
 
         <div className="paymentModal__buttons">
           <button className="paymentModal__button" onClick={modalCancelButtonHandler}>Отмена</button>
