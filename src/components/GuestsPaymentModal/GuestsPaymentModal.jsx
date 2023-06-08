@@ -1,7 +1,7 @@
 import './GuestsPaymentModal.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { editGuestAsync, setCurrentGroupAsync } from '../../store/guests/guestsActionCreaters';
+import { editGuestAsync, setCurrentGroupAsync, notShowPaymentModal} from '../../store/guests/guestsActionCreaters';
 
 function GuestsPaymentModal() {
   const dispatch = useDispatch();
@@ -15,7 +15,21 @@ function GuestsPaymentModal() {
 
   const modalCancelButtonHandler = () => {
 //*************************************************************************** 2023-06-07 */
-    dispatch(editGuestAsync({
+    // dispatch(editGuestAsync({
+    //   id: currentGuest.id, 
+    //   options: {
+    //     stop_time: null,
+    //     minutes: null,
+    //     for_payment: null,
+    //     payment_description: null,
+    //     cash: null,
+    //     non_cash: null,
+    //     result_money: null,
+    //   }}
+    // ))
+//*************************************************************************** 2023-06-07 */
+
+    dispatch(notShowPaymentModal({
       id: currentGuest.id, 
       options: {
         stop_time: null,
@@ -26,8 +40,7 @@ function GuestsPaymentModal() {
         non_cash: null,
         result_money: null,
       }}
-    ))
-//*************************************************************************** 2023-06-07 */
+    ));
 
     setModalCashInput('');
     setModalNoncashInput('');

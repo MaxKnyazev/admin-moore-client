@@ -10,6 +10,7 @@ import {
   TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
   TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR,
   SET_CURRENT_GROUP_PENDING, SET_CURRENT_GROUP_SUCCESS, SET_CURRENT_GROUP_ERROR,
+  NOT_SHOW_PAYMENT_MODAL,
 } from './guestsActionTypes';
 import { sortGuests } from '../../utils/utils';
 
@@ -86,19 +87,25 @@ export const guestsReducer = (state = initialState, action) => {
           calculatedGuests[i] = {...action.payload.guest};
         }
       }
-
-      return {
-        ...state, 
-        isLoading: false, 
-        guests: sortGuests(calculatedGuests), 
-        currentGuest: action.payload.guest, 
-        showPaymentModal: true
-      }
+      return {...state, isLoading: false, guests: sortGuests(calculatedGuests), currentGuest: action.payload.guest, showPaymentModal: true}
 
 //*************************************************************************** 2023-06-07 */
 
     case CALCULATE_MONEY_ERROR:
         return {...state, isLoading: false, error: action.payload}
+
+
+
+
+    case NOT_SHOW_PAYMENT_MODAL:
+      let arrGuests = [...state.guests];
+      for (let i = 0; i < state.guests.length; i++) {
+        if (state.guests[i].id === action.payload.id) {
+          arrGuests[i] = {...arrGuests[i], ...action.payload.options};
+        }
+      }
+      return {...state, guests: sortGuests(arrGuests), showPaymentModal: false}
+    
 
 
 

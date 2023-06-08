@@ -10,6 +10,7 @@ import {
   TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
   TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR,
   SET_CURRENT_GROUP_PENDING, SET_CURRENT_GROUP_SUCCESS, SET_CURRENT_GROUP_ERROR,
+  NOT_SHOW_PAYMENT_MODAL,
 } from './guestsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
 import { calculateResultMoneyAsync } from '../shifts/shiftsActionCreaters';
@@ -204,6 +205,21 @@ console.log(`guestsActionCreaters --> editGuestAsync (${id}, ${options.toString(
     }
   }  
 }
+
+
+
+
+
+export const notShowPaymentModal = ({id, options}) => {
+  return {
+    type: NOT_SHOW_PAYMENT_MODAL,
+    payload: {
+      id,
+      options,
+    },
+  }
+}
+
 
 
 
