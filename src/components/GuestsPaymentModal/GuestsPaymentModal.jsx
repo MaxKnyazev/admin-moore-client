@@ -50,6 +50,14 @@ function GuestsPaymentModal() {
     dispatch(editGuestAsync({
       id: currentGuest.id, 
       options: {
+
+//************************************************ */
+        stop_time: currentGuest.stop_time,
+        minutes: currentGuest.minutes,
+        for_payment: currentGuest.for_payment,
+        payment_description: currentGuest.payment_description,
+//************************************************ */
+
         cash: +modalCashInput,
         non_cash: +modalNoncashInput,
         result_money: +modalCashInput + +modalNoncashInput,
