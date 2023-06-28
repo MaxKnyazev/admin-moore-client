@@ -1,0 +1,45 @@
+@import '../../variable';
+
+
+.guests__search {
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}
+
+.search {
+  &__item {
+    padding: 1vh 1vw 1vh 1vw;
+    border-radius: 20px;
+    background-color: $main-background-color;
+  }
+
+  &__svg {
+    fill: $main-color;
+    width: 1rem;
+    vertical-align: middle;
+  }
+  
+  &__input {
+    padding: 1vh 1vw 1vh 0.5vw;
+    border-radius: 0;
+
+    &:focus {
+      background-color: $guests-search-focus;
+    }
+  }
+  
+  &__clear {
+    padding: 1vh 0 1vh 1vw;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    // vertical-align: middle;
+    // position: absolute;
+  }
+
+  &__filter {
+    padding: 1vh 1vw 1vh 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

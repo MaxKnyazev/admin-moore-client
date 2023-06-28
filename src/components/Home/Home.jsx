@@ -12,9 +12,7 @@ const Home = () => {
 
       <Guests />
       
-      <Cashbox />
-
-
+      {/* <Cashbox /> */}
     </div>
   );
 }

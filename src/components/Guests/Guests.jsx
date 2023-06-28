@@ -11,6 +11,7 @@ import GuestsPaymentModal from '../GuestsPaymentModal';
 import GuestsAddGroupModal from '../GuestsAddGroupModal';
 import GuestsPaymentGroupModal from '../GuestsPaymentGroupModal';
 import GuestsList from '../GuestsList';
+import GuestsNav from '../GuestsNav';
 
 function Guests() {
   const dispatch = useDispatch();
@@ -37,16 +38,18 @@ useEffect(() => {
 
   return (
     <section className="guests">
-      <button className="test__button" onClick={buttonHandler}>Reload guests</button>
+      {/* <button className="test__button" onClick={buttonHandler}>Reload guests</button> */}
       {
         isLoading && <GuestsLoader />
       }
 
-      <GuestsAdd />
+      <GuestsNav />
 
-      <GuestsSearch />
+      {/* <GuestsAdd /> */}
 
-      <GuestsList />
+      {/* <GuestsSearch /> */}
+
+      {/* <GuestsList /> */}
 
       { showPaymentModal && <GuestsPaymentModal /> }
       { showAddGroupModal && <GuestsAddGroupModal /> }
