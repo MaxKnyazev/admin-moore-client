@@ -1,8 +1,15 @@
+@import '../../variable';
+
 .guests {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: $guests-background-color;
+  width: 60vw;
+  min-height: 70vh;
+  border-radius: 35px;
+  padding: 3vh 3vw 3vh 3vw;
 
   &__description {
     display: flex;
