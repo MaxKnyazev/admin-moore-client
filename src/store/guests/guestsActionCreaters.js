@@ -10,6 +10,7 @@ import {
   TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
   TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR,
   SET_CURRENT_GROUP_PENDING, SET_CURRENT_GROUP_SUCCESS, SET_CURRENT_GROUP_ERROR,
+  NOT_SHOW_PAYMENT_MODAL,
 } from './guestsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
 import { calculateResultMoneyAsync } from '../shifts/shiftsActionCreaters';
@@ -187,6 +188,9 @@ export const editGuestError = (error) => {
 }
 
 export const editGuestAsync = ({ id, options }) => {
+//*************************************************************************** 2023-06-07 */
+console.log(`guestsActionCreaters --> editGuestAsync (${id}, ${options.toString()})`);
+//*************************************************************************** 2023-06-07 */
   return async (dispatch) => {
     try {
       dispatch(editGuestPending());
@@ -201,6 +205,21 @@ export const editGuestAsync = ({ id, options }) => {
     }
   }  
 }
+
+
+
+
+
+export const notShowPaymentModal = ({id, options}) => {
+  return {
+    type: NOT_SHOW_PAYMENT_MODAL,
+    payload: {
+      id,
+      options,
+    },
+  }
+}
+
 
 
 
@@ -227,7 +246,13 @@ export const calculateMoneyError = (error) => {
   }
 }
 
+//*************************************************************************** 2023-06-07 */
+
 export const calculateMoneyAsync = ({ id, stopTime }) => {
+  //*************************************************************************** 2023-06-07 */
+console.log(`guestsActionCreaters --> calculateMoneyAsync (${id}, ${stopTime})`);
+//*************************************************************************** 2023-06-07 */
+
   return async (dispatch) => {
     try {
       dispatch(calculateMoneyPending());
@@ -242,6 +267,7 @@ export const calculateMoneyAsync = ({ id, stopTime }) => {
   }  
 }
 
+//*************************************************************************** 2023-06-07 */
 
 
 export const calculateBreakPending = () => {

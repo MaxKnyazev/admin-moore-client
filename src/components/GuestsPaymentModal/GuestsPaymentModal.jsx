@@ -1,7 +1,7 @@
 import './GuestsPaymentModal.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { editGuestAsync, setCurrentGroupAsync } from '../../store/guests/guestsActionCreaters';
+import { editGuestAsync, setCurrentGroupAsync, notShowPaymentModal} from '../../store/guests/guestsActionCreaters';
 
 function GuestsPaymentModal() {
   const dispatch = useDispatch();
@@ -14,7 +14,22 @@ function GuestsPaymentModal() {
   }
 
   const modalCancelButtonHandler = () => {
-    dispatch(editGuestAsync({
+//*************************************************************************** 2023-06-07 */
+    // dispatch(editGuestAsync({
+    //   id: currentGuest.id, 
+    //   options: {
+    //     stop_time: null,
+    //     minutes: null,
+    //     for_payment: null,
+    //     payment_description: null,
+    //     cash: null,
+    //     non_cash: null,
+    //     result_money: null,
+    //   }}
+    // ))
+//*************************************************************************** 2023-06-07 */
+
+    dispatch(notShowPaymentModal({
       id: currentGuest.id, 
       options: {
         stop_time: null,
@@ -25,7 +40,8 @@ function GuestsPaymentModal() {
         non_cash: null,
         result_money: null,
       }}
-    ))
+    ));
+
     setModalCashInput('');
     setModalNoncashInput('');
   }
@@ -34,6 +50,14 @@ function GuestsPaymentModal() {
     dispatch(editGuestAsync({
       id: currentGuest.id, 
       options: {
+
+//************************************************ */
+        stop_time: currentGuest.stop_time,
+        minutes: currentGuest.minutes,
+        for_payment: currentGuest.for_payment,
+        payment_description: currentGuest.payment_description,
+//************************************************ */
+
         cash: +modalCashInput,
         non_cash: +modalNoncashInput,
         result_money: +modalCashInput + +modalNoncashInput,
@@ -60,11 +84,22 @@ function GuestsPaymentModal() {
         </div>
 
         <label htmlFor="">Наличные:</label>
-        <input type="number" placeholder="Cash..." className="paymentModal__input" value={modalCashInput} onChange={e => {inputHandler(e, setModalCashInput)}} />
+        <input 
+          type="number" 
+          placeholder="Cash..." 
+          className="paymentModal__input" 
+          value={modalCashInput} 
+          onChange={e => {inputHandler(e, setModalCashInput)}} 
+        />
 
         <label htmlFor="">Безналичные:</label>
-        <input type="number" placeholder="Non-cash..." className="paymentModal__input" value={modalNoncashInput} onChange={e => {inputHandler(e, setModalNoncashInput)}} />
-
+        <input 
+          type="number" 
+          placeholder="Non-cash..." 
+          className="paymentModal__input" 
+          value={modalNoncashInput} 
+          onChange={e => {inputHandler(e, setModalNoncashInput)}} 
+        />
 
         <div className="paymentModal__buttons">
           <button className="paymentModal__button" onClick={modalCancelButtonHandler}>Отмена</button>

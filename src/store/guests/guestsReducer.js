@@ -10,6 +10,7 @@ import {
   TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
   TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR,
   SET_CURRENT_GROUP_PENDING, SET_CURRENT_GROUP_SUCCESS, SET_CURRENT_GROUP_ERROR,
+  NOT_SHOW_PAYMENT_MODAL,
 } from './guestsActionTypes';
 import { sortGuests } from '../../utils/utils';
 
@@ -29,43 +30,29 @@ export const guestsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_GUESTS_PENDING:
       return {...state, isLoading: true}
-    
     case GET_ALL_GUESTS_SUCCESS:
       return {...state, isLoading: false, guests: sortGuests(action.payload)}
-
     case GET_ALL_GUESTS_ERROR:
       return {...state, isLoading: false, error: action.payload}
 
-
-
     case GET_GUESTS_BY_SHIFTS_ID_PENDING:
       return {...state, isLoading: true}
-    
     case GET_GUESTS_BY_SHIFTS_ID_SUCCESS:
       return {...state, isLoading: false, guests: sortGuests(action.payload)}
-
     case GET_GUESTS_BY_SHIFTS_ID_ERROR:
       return {...state, isLoading: false, error: action.payload}
 
-
-
     case ADD_GUEST_PENDING:
       return {...state, isLoading: true}
-    
     case ADD_GUEST_SUCCESS:
       return {...state, isLoading: false, guests: sortGuests([...state.guests, action.payload])}
-
     case ADD_GUEST_ERROR:
       return {...state, isLoading: false, error: action.payload}
 
-
-
     case ADD_GROUP_PENDING:
       return {...state, isLoading: true}
-    
     case ADD_GROUP_SUCCESS:
       return {...state, isLoading: false, guests: sortGuests([...state.guests, ...action.payload])}
-
     case ADD_GROUP_ERROR:
       return {...state, isLoading: false, error: action.payload}
 
@@ -73,25 +60,26 @@ export const guestsReducer = (state = initialState, action) => {
 
     case EDIT_GUEST_PENDING:
       return {...state, isLoading: true}
-    
-    case EDIT_GUEST_SUCCESS:
+
+      case EDIT_GUEST_SUCCESS:
       let editedGuests = [...state.guests];
       for (let i = 0; i < state.guests.length; i++) {
         if (state.guests[i].id === action.payload.id) {
           editedGuests[i] = {...action.payload.guest};
         }
       }
-
       return {...state, isLoading: false, guests: sortGuests(editedGuests), currentGuest: {}, showPaymentModal: false}
 
-    case EDIT_GUEST_ERROR:
+      case EDIT_GUEST_ERROR:
       return {...state, isLoading: false, error: action.payload, showPaymentModal: false}
 
 
 
     case CALCULATE_MONEY_PENDING:
       return {...state, isLoading: true}
-    
+
+//*************************************************************************** 2023-06-07 */
+ 
     case CALCULATE_MONEY_SUCCESS:
       let calculatedGuests = [...state.guests];
       for (let i = 0; i < state.guests.length; i++) {
@@ -99,11 +87,25 @@ export const guestsReducer = (state = initialState, action) => {
           calculatedGuests[i] = {...action.payload.guest};
         }
       }
-
       return {...state, isLoading: false, guests: sortGuests(calculatedGuests), currentGuest: action.payload.guest, showPaymentModal: true}
+
+//*************************************************************************** 2023-06-07 */
 
     case CALCULATE_MONEY_ERROR:
         return {...state, isLoading: false, error: action.payload}
+
+
+
+
+    case NOT_SHOW_PAYMENT_MODAL:
+      let arrGuests = [...state.guests];
+      for (let i = 0; i < state.guests.length; i++) {
+        if (state.guests[i].id === action.payload.id) {
+          arrGuests[i] = {...arrGuests[i], ...action.payload.options};
+        }
+      }
+      return {...state, guests: sortGuests(arrGuests), showPaymentModal: false}
+    
 
 
 
@@ -126,38 +128,25 @@ export const guestsReducer = (state = initialState, action) => {
     
     case CHANGE_SEARCH_INPUT_SUCCESS:
       return {...state, searchInput: action.payload}
-
     case CHANGE_SEARCH_INPUT_ERROR:
         return {...state, error: action.payload}
 
-
-
     case TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS:
       return {...state, showAddGroupModal: !state.showAddGroupModal}
-
     case TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR:
         return {...state, error: action.payload}
 
-
-
     case TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS:
       return {...state, showPaymentGroupModal: !state.showPaymentGroupModal}
-
     case TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR:
-        return {...state, error: action.payload}
-
-    
+      return {...state, error: action.payload}
 
     case SET_CURRENT_GROUP_PENDING:
       return {...state, isLoading: true}
-    
     case SET_CURRENT_GROUP_SUCCESS:
       return {...state, isLoading: false, currentGroup: sortGuests(action.payload)}
-
     case SET_CURRENT_GROUP_ERROR:
       return {...state, isLoading: false, error: action.payload}
-
-
 
     default: return state;
   }
