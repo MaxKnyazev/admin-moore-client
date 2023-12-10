@@ -37,36 +37,32 @@ function GuestsItem({guest}) {
   return (
     <li className={guest.stop_time ? 'guests__wrapper opacity' : 'guests__wrapper'}>
       <div className="guests__item item">
-        {
-          guest.is_break 
-          ? <button className="item__button" onClick={() => {breakButtonHandler(guest.id, guest.is_break)}}>Продолжить</button>
-          : <button className="item__button" onClick={() => {breakButtonHandler(guest.id, guest.is_break)}}>Пауза</button> 
-        }
         
         <span className="item__time">
+        {
+          guest.is_break 
+          ? <button className="item__button item__button--blue" onClick={() => {breakButtonHandler(guest.id, guest.is_break)}}>П</button>
+          : <button className="item__button item__button--blue" onClick={() => {breakButtonHandler(guest.id, guest.is_break)}}>П</button> 
+        }
+
           {guest.start_time} - {guest.stop_time || '...'}
         </span>
 
         <span className="item__name">{guest.name}</span>
         {
           guest.result_money
-          ? <span>Человек ушел...</span>
-          : <button className="item__button" onClick={() => {calculateButtonHandler(guest)}}>Рассчитать</button>
+          ? <div className="guests__buttons">
+              <button className="item__button item__button--yellow" onClick={() => {calculateButtonHandler(guest)}}>К</button>
+              <button className="item__button item__button--red" onClick={() => {calculateButtonHandler(guest)}}>У</button>
+              <button className="item__button item__button--blue" onClick={() => {calculateButtonHandler(guest)}}>Р</button>
+            </div>
+          : <div className="guests__buttons">
+              <button className="item__button item__button--yellow" onClick={() => {calculateButtonHandler(guest)}}>К</button>
+              <button className="item__button item__button--green" onClick={() => {calculateButtonHandler(guest)}}>П</button>
+              <button className="item__button item__button--red" onClick={() => {calculateButtonHandler(guest)}}>У</button>
+              <button className="item__button item__button--blue" onClick={() => {calculateButtonHandler(guest)}}>Р</button>
+            </div>
         }
-      </div>
-
-      <div className="guests__item item--additional">
-        <span className="item__time">
-          time: {guest.minutes || '*'}
-        </span>
-
-        <span className="item__time">
-          money: {guest.for_payment || '*'}
-        </span>
-
-        <span className="item__time">
-          tariff: {guest.tariffs_id || '*'}
-        </span>
       </div>
     </li>
   )

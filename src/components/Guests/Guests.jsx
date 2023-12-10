@@ -5,8 +5,6 @@ import { calculateResultMoneyAsync } from '../../store/shifts/shiftsActionCreate
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback, useEffect } from 'react';
 import GuestsLoader from '../GuestsLoader';
-import GuestsAdd from '../GuestsAdd';
-import GuestsSearch from '../GuestsSearch';
 import GuestsPaymentModal from '../GuestsPaymentModal';
 import GuestsAddGroupModal from '../GuestsAddGroupModal';
 import GuestsPaymentGroupModal from '../GuestsPaymentGroupModal';
@@ -45,11 +43,8 @@ useEffect(() => {
 
       <GuestsNav />
 
-      {/* <GuestsAdd /> */}
-
       {/* <GuestsSearch /> */}
-
-      {/* <GuestsList /> */}
+      <GuestsList />
 
       { showPaymentModal && <GuestsPaymentModal /> }
       { showAddGroupModal && <GuestsAddGroupModal /> }

@@ -1,24 +1,17 @@
-import GuestsSearch from '../GuestsSearch';
 import './GuestsNav.scss';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { changeSearchInput } from '../../store/guests/guestsActionCreaters';
+import GuestsSearch from '../GuestsSearch';
+import GuestsAddGuest from '../GuestsAddGuest';
+import GuestsAddGroup from '../GuestsAddGroup';
+import GuestsCashboxShow from '../GuestsCashboxShow/GuestsCashboxShow';
 
 function GuestsNav() {
-  // const [ searchInput, setSearchInput ] = useState('');
-  // const dispatch = useDispatch();
-  // const { searchInput } = useSelector(state => state.guestsReducer);
-  
-  // const searchClearButtonHandler = () => {
-  //   dispatch(changeSearchInput(''))
-  // }
-
-  // const searchInputHandler = e => {
-  //   dispatch(changeSearchInput(e.target.value))
-  // }
 
   return (
     <div className="guests__nav">
       <GuestsSearch />
+      <GuestsCashboxShow />
+      <GuestsAddGuest />
+      <GuestsAddGroup />
     </div>
   )
 }

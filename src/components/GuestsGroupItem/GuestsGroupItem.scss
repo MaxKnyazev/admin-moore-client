@@ -1,22 +1,9 @@
+
 .guests {
-  .group--additional {
-    background-color: rgb(165, 204, 219);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &__wrapper {
-    border-bottom: 3px solid rgb(117, 193, 255);
-    margin-bottom: 2vh;
-  }
-
   &__group {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-width: 50vw;
-    min-height: 3vh;
     background-color: rgb(203, 240, 255);
 
     .group {
