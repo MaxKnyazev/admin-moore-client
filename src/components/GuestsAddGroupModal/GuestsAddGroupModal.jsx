@@ -60,10 +60,14 @@ function GuestsAddGroupModal() {
   return (
     <section className="addGroupModal">
       <div className="addGroupModal__wrapper">
-        <div className="addGroupModal__form form">
-          <span className="form__title">Название группы:</span>
-          <input className="form__input" placeholder="Group name..." type="text" value={inputGroupName} onChange={e => {inputHandler(e, setInputGroupName)}} />
-          <button className="form__button" onClick={addToGroupButtonHandler}>Добавить человека</button>
+
+        <div className="addGroupModal__header">
+          <h2 className="addGroupModal__title">Добавить группу</h2>
+
+          <div className="addGroupModal__form form">
+            <input className="form__input" placeholder="Имя группы..." type="text" value={inputGroupName} onChange={e => {inputHandler(e, setInputGroupName)}} />
+            <button className="form__button" onClick={addToGroupButtonHandler}>+</button>
+          </div>
         </div>
 
         <ul className="addGroupModal__list">
@@ -76,17 +80,20 @@ function GuestsAddGroupModal() {
                   <option value="2">Детский</option>
                 </select>
 
-                <span className="item__titel">+{count}</span>
+                <span className="item__title">{inputGroupName} +{count}</span>
 
-                <button className="item__button" onClick={() => {deleteGuestButtonHandler(elem.id)}}>Удалить</button>
+                <div className="item__buttons">
+                  <button className="item__button item__button--comment" onClick={() => {deleteGuestButtonHandler(elem.id)}}>К</button>
+                  <button className="item__button item__button--delete" onClick={() => {deleteGuestButtonHandler(elem.id)}}>У</button>
+                </div>
               </li>
             )
           })}
         </ul>
 
         <div className="addGroupModal__buttons">
-          <button className="addGroupModal__button" onClick={cancelButtonHandler}>Отмена</button>
-          <button className="addGroupModal__button" onClick={addGroupButtonHandler}>Добавить группу</button>
+          <button className="addGroupModal__button addGroupModal__button--cancel" onClick={cancelButtonHandler}>Отмена X</button>
+          <button className="addGroupModal__button addGroupModal__button--add" onClick={addGroupButtonHandler}>Добавить ✔</button> 
         </div>
       </div>
     </section>

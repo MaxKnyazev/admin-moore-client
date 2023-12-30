@@ -29,12 +29,14 @@
     .item {
       &__time {
         display: flex;
+        align-items: center;
         gap: 1rem;
       }
 
       &__name {
         display: flex;
         justify-content: center;
+        align-items: center;
       }
 
       &__button {

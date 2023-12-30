@@ -8,6 +8,7 @@ import {
   CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
   CHANGE_SEARCH_INPUT_SUCCESS, CHANGE_SEARCH_INPUT_ERROR,
   TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
+  TOGGLE_SHOW_ADD_GUEST_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GUEST_MODAL_ERROR,
   TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR,
   SET_CURRENT_GROUP_PENDING, SET_CURRENT_GROUP_SUCCESS, SET_CURRENT_GROUP_ERROR,
   NOT_SHOW_PAYMENT_MODAL,
@@ -22,6 +23,7 @@ const initialState = {
   searchInput: '',
   showPaymentModal: false,
   showAddGroupModal: false,
+  showAddGuestModal: false,
   showPaymentGroupModal: false,
   currentGroup: [],
 }
@@ -60,8 +62,7 @@ export const guestsReducer = (state = initialState, action) => {
 
     case EDIT_GUEST_PENDING:
       return {...state, isLoading: true}
-
-      case EDIT_GUEST_SUCCESS:
+    case EDIT_GUEST_SUCCESS:
       let editedGuests = [...state.guests];
       for (let i = 0; i < state.guests.length; i++) {
         if (state.guests[i].id === action.payload.id) {
@@ -69,8 +70,7 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
       return {...state, isLoading: false, guests: sortGuests(editedGuests), currentGuest: {}, showPaymentModal: false}
-
-      case EDIT_GUEST_ERROR:
+    case EDIT_GUEST_ERROR:
       return {...state, isLoading: false, error: action.payload, showPaymentModal: false}
 
 
@@ -134,6 +134,11 @@ export const guestsReducer = (state = initialState, action) => {
     case TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS:
       return {...state, showAddGroupModal: !state.showAddGroupModal}
     case TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR:
+        return {...state, error: action.payload}
+
+    case TOGGLE_SHOW_ADD_GUEST_MODAL_SUCCESS:
+      return {...state, showAddGuestModal: !state.showAddGuestModal}
+    case TOGGLE_SHOW_ADD_GUEST_MODAL_ERROR:
         return {...state, error: action.payload}
 
     case TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS:

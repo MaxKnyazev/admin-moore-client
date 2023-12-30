@@ -1,24 +1,16 @@
 import './GuestsAddGuest.scss';
-import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
-// import { createValidDate, createValidTime } from '../../utils/utils';
-// import { addGuestAsync, toggleShowAddGroupModal } from '../../store/guests/guestsActionCreaters';
+import { useDispatch } from 'react-redux';
+import { toggleShowAddGuestModal } from '../../store/guests/guestsActionCreaters';
 
 function GuestsAddGuest() {
   const dispatch = useDispatch();
-  // const { user } = useSelector(state => state.authReducer);
-  // const { currentShift } = useSelector(state => state.shiftsReducer);
 
-  const buttonAddGuestHandler = () => {
-    
+  const buttonShowGuestModalHandler = () => {
+    dispatch(toggleShowAddGuestModal());
   }
 
-  // const buttonAddGroupHandler = () => {
-  //   dispatch(toggleShowAddGroupModal());
-  // }
-
   return (
-    <button className="addGuest__button" onClick={buttonAddGuestHandler}>Добавить гостя</button>
+    <button className="addGuest__button" onClick={buttonShowGuestModalHandler}>Добавить гостя</button>
   )
 }
 

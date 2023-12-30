@@ -9,12 +9,12 @@ function GuestsAddGroup() {
   // const { user } = useSelector(state => state.authReducer);
   // const { currentShift } = useSelector(state => state.shiftsReducer);
 
-  const buttonAddGroupHandler = () => {
+  const buttonShowGroupModalHandler = () => {
     dispatch(toggleShowAddGroupModal());
   }
 
   return (
-    <button className="addGuest__button" onClick={buttonAddGroupHandler}>Добавить группу</button>
+    <button className="addGuest__button" onClick={buttonShowGroupModalHandler}>Добавить группу</button>
   )
 }
 

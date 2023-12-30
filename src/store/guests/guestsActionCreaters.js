@@ -8,6 +8,7 @@ import {
   CALCULATE_BREAK_PENDING, CALCULATE_BREAK_SUCCESS, CALCULATE_BREAK_ERROR,
   CHANGE_SEARCH_INPUT_SUCCESS, CHANGE_SEARCH_INPUT_ERROR,
   TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR,
+  TOGGLE_SHOW_ADD_GUEST_MODAL_SUCCESS, TOGGLE_SHOW_ADD_GUEST_MODAL_ERROR,
   TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS, TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR,
   SET_CURRENT_GROUP_PENDING, SET_CURRENT_GROUP_SUCCESS, SET_CURRENT_GROUP_ERROR,
   NOT_SHOW_PAYMENT_MODAL,
@@ -355,6 +356,31 @@ export const toggleShowAddGroupModal = () => {
       dispatch(toggleShowAddGroupModalSuccess());
     } catch (error) {
       dispatch(toggleShowAddGroupModalError(error));
+    }
+  }  
+}
+
+
+
+export const toggleShowAddGuestModalSuccess = () => {
+  return {
+    type: TOGGLE_SHOW_ADD_GUEST_MODAL_SUCCESS,
+  }
+}
+
+export const toggleShowAddGuestModalError = (error) => {
+  return {
+    type: TOGGLE_SHOW_ADD_GUEST_MODAL_ERROR,
+    payload: error,
+  }
+}
+
+export const toggleShowAddGuestModal = () => {
+  return (dispatch) => {
+    try {
+      dispatch(toggleShowAddGuestModalSuccess());
+    } catch (error) {
+      dispatch(toggleShowAddGuestModalError(error));
     }
   }  
 }

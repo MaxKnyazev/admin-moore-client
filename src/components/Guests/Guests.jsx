@@ -7,13 +7,14 @@ import { useCallback, useEffect } from 'react';
 import GuestsLoader from '../GuestsLoader';
 import GuestsPaymentModal from '../GuestsPaymentModal';
 import GuestsAddGroupModal from '../GuestsAddGroupModal';
+import GuestsAddGuestModal from '../GuestsAddGuestModal';
 import GuestsPaymentGroupModal from '../GuestsPaymentGroupModal';
 import GuestsList from '../GuestsList';
 import GuestsNav from '../GuestsNav';
 
 function Guests() {
   const dispatch = useDispatch();
-  const { showPaymentModal, showAddGroupModal, showPaymentGroupModal, isLoading } = useSelector(state => state.guestsReducer);
+  const { showPaymentModal, showAddGroupModal, showAddGuestModal, showPaymentGroupModal, isLoading } = useSelector(state => state.guestsReducer);
   const { currentShift } = useSelector(state => state.shiftsReducer);
 
 
@@ -48,6 +49,7 @@ useEffect(() => {
 
       { showPaymentModal && <GuestsPaymentModal /> }
       { showAddGroupModal && <GuestsAddGroupModal /> }
+      { showAddGuestModal && <GuestsAddGuestModal /> }
       { showPaymentGroupModal && <GuestsPaymentGroupModal /> }
     </section>
   )

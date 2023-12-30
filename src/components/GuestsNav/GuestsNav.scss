@@ -2,11 +2,14 @@
 
 .guests__nav {
   background-color: $guests-background-color-dark;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   padding: 1rem;
   border-radius: 20px;
   margin-bottom: 2vh;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }

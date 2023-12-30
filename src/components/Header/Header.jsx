@@ -119,7 +119,7 @@ function Header() {
           </svg>
     
           <div className="header__wrapper">
-            <h1 className="header__h1">Admin Moore</h1>
+            <h1 className="header__h1">ADMIN MOORE</h1>
           </div>
     
           <svg className="header__svg" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 297.000000 279.000000" preserveAspectRatio="xMidYMid meet">
