@@ -30,6 +30,7 @@ const initialState = {
 
 export const guestsReducer = (state = initialState, action) => {
   switch (action.type) {
+    // ------------------------------------------------------------------ GET_ALL_GUESTS
     case GET_ALL_GUESTS_PENDING:
       return {...state, isLoading: true}
     case GET_ALL_GUESTS_SUCCESS:
@@ -37,6 +38,7 @@ export const guestsReducer = (state = initialState, action) => {
     case GET_ALL_GUESTS_ERROR:
       return {...state, isLoading: false, error: action.payload}
 
+    // ----------------------------------------------------------- GET_GUESTS_BY_SHIFTS_ID
     case GET_GUESTS_BY_SHIFTS_ID_PENDING:
       return {...state, isLoading: true}
     case GET_GUESTS_BY_SHIFTS_ID_SUCCESS:
@@ -44,6 +46,7 @@ export const guestsReducer = (state = initialState, action) => {
     case GET_GUESTS_BY_SHIFTS_ID_ERROR:
       return {...state, isLoading: false, error: action.payload}
 
+    // ------------------------------------------------------------------------ GET_GUESTS
     case ADD_GUEST_PENDING:
       return {...state, isLoading: true}
     case ADD_GUEST_SUCCESS:
@@ -51,6 +54,7 @@ export const guestsReducer = (state = initialState, action) => {
     case ADD_GUEST_ERROR:
       return {...state, isLoading: false, error: action.payload}
 
+    // ------------------------------------------------------------------------- ADD_GROUP
     case ADD_GROUP_PENDING:
       return {...state, isLoading: true}
     case ADD_GROUP_SUCCESS:
@@ -58,8 +62,7 @@ export const guestsReducer = (state = initialState, action) => {
     case ADD_GROUP_ERROR:
       return {...state, isLoading: false, error: action.payload}
 
-
-
+    // ------------------------------------------------------------------------- EDIT_GUEST
     case EDIT_GUEST_PENDING:
       return {...state, isLoading: true}
     case EDIT_GUEST_SUCCESS:
@@ -73,14 +76,10 @@ export const guestsReducer = (state = initialState, action) => {
     case EDIT_GUEST_ERROR:
       return {...state, isLoading: false, error: action.payload, showPaymentModal: false}
 
-
-
+    // ------------------------------------------------------------------------- CALCULATE_MONEY
     case CALCULATE_MONEY_PENDING:
       return {...state, isLoading: true}
-
-//*************************************************************************** 2023-06-07 */
- 
-    case CALCULATE_MONEY_SUCCESS:
+    case CALCULATE_MONEY_SUCCESS:               //****************** 2023-06-07 */
       let calculatedGuests = [...state.guests];
       for (let i = 0; i < state.guests.length; i++) {
         if (state.guests[i].id === action.payload.id) {
@@ -88,15 +87,10 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
       return {...state, isLoading: false, guests: sortGuests(calculatedGuests), currentGuest: action.payload.guest, showPaymentModal: true}
-
-//*************************************************************************** 2023-06-07 */
-
     case CALCULATE_MONEY_ERROR:
         return {...state, isLoading: false, error: action.payload}
 
-
-
-
+    // ------------------------------------------------------------------------- NOT_SHOW_PAYMENT_MODAL
     case NOT_SHOW_PAYMENT_MODAL:
       let arrGuests = [...state.guests];
       for (let i = 0; i < state.guests.length; i++) {
@@ -105,13 +99,10 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
       return {...state, guests: sortGuests(arrGuests), showPaymentModal: false}
-    
 
-
-
+    // ------------------------------------------------------------------------- CALCULATE_BREAK
     case CALCULATE_BREAK_PENDING:
       return {...state, isLoading: true}
-    
     case CALCULATE_BREAK_SUCCESS:
       let breakGuests = [...state.guests];
       for (let i = 0; i < state.guests.length; i++) {
@@ -120,32 +111,34 @@ export const guestsReducer = (state = initialState, action) => {
         }
       }
       return {...state, isLoading: false, guests: sortGuests(breakGuests)}
-
     case CALCULATE_BREAK_ERROR:
         return {...state, isLoading: false, error: action.payload}
 
-
-    
+    // ------------------------------------------------------------------------- CHANGE_SEARCH_INPUT
     case CHANGE_SEARCH_INPUT_SUCCESS:
       return {...state, searchInput: action.payload}
     case CHANGE_SEARCH_INPUT_ERROR:
         return {...state, error: action.payload}
 
+    // ------------------------------------------------------------------------- TOGGLE_SHOW_ADD_GROUP_MODAL
     case TOGGLE_SHOW_ADD_GROUP_MODAL_SUCCESS:
       return {...state, showAddGroupModal: !state.showAddGroupModal}
     case TOGGLE_SHOW_ADD_GROUP_MODAL_ERROR:
         return {...state, error: action.payload}
 
+    // ------------------------------------------------------------------------- TOGGLE_SHOW_ADD_GUEST_MODAL
     case TOGGLE_SHOW_ADD_GUEST_MODAL_SUCCESS:
       return {...state, showAddGuestModal: !state.showAddGuestModal}
     case TOGGLE_SHOW_ADD_GUEST_MODAL_ERROR:
         return {...state, error: action.payload}
 
+    // ------------------------------------------------------------------------- TOGGLE_SHOW_PAYMENT_GROUP_MODAL
     case TOGGLE_SHOW_PAYMENT_GROUP_MODAL_SUCCESS:
       return {...state, showPaymentGroupModal: !state.showPaymentGroupModal}
     case TOGGLE_SHOW_PAYMENT_GROUP_MODAL_ERROR:
       return {...state, error: action.payload}
 
+    // ------------------------------------------------------------------------- SET_CURRENT_GROUP
     case SET_CURRENT_GROUP_PENDING:
       return {...state, isLoading: true}
     case SET_CURRENT_GROUP_SUCCESS:
