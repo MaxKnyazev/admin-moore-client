@@ -12,8 +12,8 @@
   align-items: center;
 
   &__wrapper {
-    min-width: 50vw;
-    min-height: 60vh;
+    min-width: 40vw;
+    min-height: 30vh;
     background-color: $main-background-color;
 
     display: flex;
@@ -22,5 +22,55 @@
     flex-direction: column;
     padding: 1rem 0 1rem 0;
     border-radius: 35px;
+  }
+
+  &__title {
+    font-family: 'Shantell Sans';
+    font-size: 36px;
+    margin-bottom: 1rem;
+  }
+
+  &__settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__input {
+    min-width: 13rem;
+    min-height: 2rem;
+    border-radius: 25px;
+    background-color: $guests-background-color;
+    padding-left: 1rem;
+  }
+
+  &__tariff {
+    text-align: center;
+    min-width: 10vw;
+    min-height: 2rem;
+    background-color: $guests-yellow;
+    border-radius: 25px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+  }
+
+  &__button {
+    min-height: 2rem;
+    padding: 0 1rem 0 1rem;
+    border-radius: 25px;
+    
+    &--cancel {
+      background-color: $guests-red;
+    }
+
+    &--add {
+      background-color: $guests-green;
+    }
   }
 }

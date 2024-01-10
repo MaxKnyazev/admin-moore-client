@@ -34,6 +34,11 @@ function GuestsItem({guest}) {
     }
   }
 
+  const deleteButtonHandler = (id) => {
+    dispatch(calculateBreakAsync({
+    }))
+  }
+
   return (
     <li className={guest.stop_time ? 'guests__wrapper opacity' : 'guests__wrapper'}>
       <div className="guests__item item">
@@ -59,7 +64,7 @@ function GuestsItem({guest}) {
           : <div className="guests__buttons">
               <button className="item__button item__button--yellow" onClick={() => {calculateButtonHandler(guest)}}>К</button>
               <button className="item__button item__button--green" onClick={() => {calculateButtonHandler(guest)}}>П</button>
-              <button className="item__button item__button--red" onClick={() => {calculateButtonHandler(guest)}}>У</button>
+              <button className="item__button item__button--red" onClick={() => {deleteButtonHandler(guest)}}>У</button>
               <button className="item__button item__button--blue" onClick={() => {calculateButtonHandler(guest)}}>Р</button>
             </div>
         }
