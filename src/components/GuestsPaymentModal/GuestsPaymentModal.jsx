@@ -14,21 +14,6 @@ function GuestsPaymentModal() {
   }
 
   const modalCancelButtonHandler = () => {
-//*************************************************************************** 2023-06-07 */
-    // dispatch(editGuestAsync({
-    //   id: currentGuest.id, 
-    //   options: {
-    //     stop_time: null,
-    //     minutes: null,
-    //     for_payment: null,
-    //     payment_description: null,
-    //     cash: null,
-    //     non_cash: null,
-    //     result_money: null,
-    //   }}
-    // ))
-//*************************************************************************** 2023-06-07 */
-
     dispatch(notShowPaymentModal({
       id: currentGuest.id, 
       options: {
@@ -75,35 +60,44 @@ function GuestsPaymentModal() {
   return (
     <section className="paymentModal">
       <div className="paymentModal__wrapper">
+        <h2 className="paymentModal__title">Добавить гостя</h2>
+
         <div className="paymentModal__description">
-          <span>Payment description: {currentGuest.payment_description}</span>
-          <span>Tariff: {currentGuest.tariffs_id}</span>
-          <span>Time: {currentGuest.start_time} - {currentGuest.stop_time}</span>
-          <span>Minutes: {currentGuest.minutes}</span>
-          <span>For payment: {currentGuest.for_payment}</span>
+          <span>Время: <b>{currentGuest.start_time} - {currentGuest.stop_time}</b></span>
+          <span>Количество минут: <b>{currentGuest.minutes}</b></span>
+          <span>Тариф: <b>{currentGuest.tariffs_id}</b></span>
+          <span>К оплате: <b>{currentGuest.for_payment}</b></span>
         </div>
 
-        <label htmlFor="">Наличные:</label>
-        <input 
-          type="number" 
-          placeholder="Cash..." 
-          className="paymentModal__input" 
-          value={modalCashInput} 
-          onChange={e => {inputHandler(e, setModalCashInput)}} 
-        />
+        <div className="paymentModal__calculation">
+          <div className="paymentModal__box">
+            <label htmlFor="paymentCash">Наличные:</label>
+            <input
+              id="paymentCash" 
+              type="number" 
+              placeholder="Cash..." 
+              className="paymentModal__input" 
+              value={modalCashInput} 
+              onChange={e => {inputHandler(e, setModalCashInput)}} 
+            />
+          </div>
 
-        <label htmlFor="">Безналичные:</label>
-        <input 
-          type="number" 
-          placeholder="Non-cash..." 
-          className="paymentModal__input" 
-          value={modalNoncashInput} 
-          onChange={e => {inputHandler(e, setModalNoncashInput)}} 
-        />
+          <div className="paymentModal__box">
+            <label htmlFor="paymentNoncash">Безналичные:</label>
+            <input
+              id="paymentNoncash"
+              type="number" 
+              placeholder="Non-cash..." 
+              className="paymentModal__input" 
+              value={modalNoncashInput} 
+              onChange={e => {inputHandler(e, setModalNoncashInput)}} 
+            />
+          </div>
+        </div>
 
         <div className="paymentModal__buttons">
-          <button className="paymentModal__button" onClick={modalCancelButtonHandler}>Отмена</button>
-          <button className="paymentModal__button" onClick={modalPaymentButtonHandler}>Оплатить</button>
+          <button className="paymentModal__button paymentModal__button--cancel" onClick={modalCancelButtonHandler}>Отмена X</button>
+          <button className="paymentModal__button paymentModal__button--accept" onClick={modalPaymentButtonHandler}>Оплатить ✔</button>
         </div>
       </div>
     </section>

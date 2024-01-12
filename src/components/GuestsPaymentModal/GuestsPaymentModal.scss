@@ -1,6 +1,7 @@
+@import '../../variable';
+
 .paymentModal {
   position: absolute;
-  z-index: 999;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
@@ -10,16 +11,24 @@
   justify-content: center;
   align-items: center;
 
+
   &__wrapper {
-    width: 80vw;
-    height: 80vh;
-    background-color: #fff;
+    min-width: 50vw;
+    min-height: 60vh;
+    background-color: $main-background-color;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    gap: 0.3rem;
+    padding: 1rem;
+    border-radius: 35px;
+  }
+
+  &__title {
+    font-family: 'Shantell Sans';
+    font-size: 36px;
+    margin-bottom: 2rem;
   }
 
   &__description {
@@ -30,18 +39,47 @@
     margin-bottom: 3vh;
   }
 
+  &__calculation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
   &__input {
-    min-width: 15vw;
-    min-height: 3vh;
-    background-color: #dbdbdb;
-    padding-left: 10px;
-    margin-bottom: 0.5rem;
+    min-width: 13rem;
+    min-height: 2rem;
+    border-radius: 25px;
+    background-color: $guests-background-color;
+    padding-left: 1rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
   }
 
   &__button {
-    margin: 1rem 0.5rem 0 0.5rem;
-    min-width: 8vw;
-    min-height: 3vh;
-    background-color: #8d8d8d;
+    min-height: 2rem;
+    padding: 0 1rem 0 1rem;
+    border-radius: 25px;
+    
+    &--cancel {
+      background-color: $guests-red;
+    }
+
+    &--accept {
+      background-color: $guests-green;
+    }
   }
 }

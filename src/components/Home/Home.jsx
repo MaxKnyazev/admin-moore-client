@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Header from '../Header';
 import Guests from '../Guests';
-import Cashbox from '../Cashbox';
+import CashboxModal from '../CashboxModal';
 import './Home.scss';
 
 const Home = () => {

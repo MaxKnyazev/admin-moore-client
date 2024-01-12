@@ -1,8 +1,28 @@
+@import '../../variable';
+
 .cashbox {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2vh;
+
+  &__wrapper {
+    min-width: 40vw;
+    min-height: 30vh;
+    background-color: $main-background-color;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem 0 1rem 0;
+    border-radius: 35px;
+  }
 
   &__money {
     display: flex;
