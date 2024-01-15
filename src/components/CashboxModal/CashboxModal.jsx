@@ -1,9 +1,10 @@
 import './CashboxModal.scss';
-import { addCashboxLogAsync } from '../../store/cashboxLogs/cashboxLogsActionCreaters';
-import { createValidDate, createValidTime } from '../../utils/utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { createValidDate, createValidTime } from '../../utils/utils';
+import { addCashboxLogAsync, toggleShowCashboxModal } from '../../store/cashboxLogs/cashboxLogsActionCreaters';
 import React from 'react';
+import CashboxRadio from '../CashboxRadio';
 
 function CashboxModal() {
   const dispatch = useDispatch();
@@ -12,11 +13,15 @@ function CashboxModal() {
 
   const [ cashboxMoneyInput, setCashboxMoneyInput ] = useState('');
   const [ cashboxCommentInput, setCashboxCommentInput ] = useState('');
-  const [ moneyType, setMoneyType ] = useState('cash');
+  const [ moneyType, setMoneyType ] = useState('сash');
 
   const inputHandler = (e, setInput) => {
     setInput(e.target.value);
   };
+
+  const cancelButtonHandler = () => {
+    dispatch(toggleShowCashboxModal());
+  }
 
   const cashboxButtonHandler = (operationType) => {
     const options = {
@@ -38,56 +43,49 @@ function CashboxModal() {
     }))
     setCashboxCommentInput('');
     setCashboxMoneyInput('');
+    dispatch(toggleShowCashboxModal());
   }
 
-  const cashboxRadioButtonHandler = (moneyTypeFromInput) => {
-    setMoneyType(moneyTypeFromInput);
+  const cashboxRadioButtonHandler = (inputType) => {
+    setMoneyType(inputType);
   }
 
   return (
-    <section className="cashbox">
-      <div className="cashbox__wrapper">
-        <div className="cashbox__money">
-          <label htmlFor="noncash">Сумма:</label>
+    <section className="cashboxModal">
+      <div className="cashboxModal__wrapper">
+        <h2 className="cashboxModal__title">Касса</h2>
+
+        <div className="cashboxModal__labels">
+          <label htmlFor="money">Сумма:</label>
           <input
-            className="cashbox__input"
+            id="money"
+            className="cashboxModal__input"
             placeholder="0"
             type="number"
             value={cashboxMoneyInput}
             onChange={(e) => inputHandler(e, setCashboxMoneyInput)}
           />
-    
-          <label htmlFor="cash">Комментарий:</label>
+
+          <label htmlFor="comment">Комментарий:</label>
           <input
-            className="cashbox__input"
+            id="comment"
+            className="cashboxModal__input"
             placeholder="Comment..."
             type="text"
             value={cashboxCommentInput}
             onChange={(e) => inputHandler(e, setCashboxCommentInput)}
           />
-    
-          <fieldset className="cashbox__fieldset fieldset">
-            <div className="fieldset__radio">
-              <input className="fieldset__input" checked={moneyType === 'cash'} type="radio" id="cash" name="cashbox" onChange={() => {cashboxRadioButtonHandler('cash')}}/>
-              <label className="fieldset__label" htmlFor="cash">Наличные</label>
-            </div>
-    
-            <div className="fieldset__radio"> 
-              <input className="fieldset__input" checked={moneyType === 'nonCash'} type="radio" id="nonCash" name="cashbox" onChange={() => {cashboxRadioButtonHandler('nonCash')}} />
-              <label className="fieldset__label" htmlFor="nonCash">Безналичные</label>
-            </div>
-          </fieldset>
-    
-          <div className="cashbox__buttons">
-            <button className="cashbox__button" onClick={() => { cashboxButtonHandler('add') }}>Приход</button>
-            <button className="cashbox__button" onClick={() => { cashboxButtonHandler('remove') }}>Расход</button>
+
+          <div className="cashboxModal__money">
+            <CashboxRadio title={'Наличные'} isActive={moneyType === 'cash'} inputType="cash" buttonHandler={cashboxRadioButtonHandler} />
+            <CashboxRadio title={'По карте'} isActive={moneyType !== 'cash'} inputType="nonCash" buttonHandler={cashboxRadioButtonHandler} />
           </div>
         </div>
-    
-        {
-          null
-        //  <div className="cashbox__display">18.000</div>
-        }
+
+        <div className="cashboxModal__buttons">
+          <button className="cashboxModal__button cashboxModal__button--cancel" onClick={cancelButtonHandler}>Отмена X</button>
+          <button className="cashboxModal__button cashboxModal__button--add" onClick={cashboxButtonHandler}>Добавить ✔</button> 
+        </div>
       </div>
     </section>
   );

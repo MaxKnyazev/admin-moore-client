@@ -1,0 +1,30 @@
+@import '../../variable';
+
+.cashboxRadio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  min-height: 2rem;
+  padding: 0 1.5rem 0 0.5rem;
+  border-radius: 25px;
+  background-color: $main-background-color;
+  border: 0.2rem solid $guests-yellow;
+
+  &--active {
+    background-color: $guests-yellow;
+    border: 0.2rem solid $guests-yellow;
+  }
+
+  &__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: $guests-yellow;
+    border-radius: 50%;
+  }
+
+  &__title {
+
+  }
+}

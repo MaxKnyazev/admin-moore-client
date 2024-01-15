@@ -1,6 +1,6 @@
 @import '../../variable';
 
-.cashbox {
+.cashboxModal {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -12,8 +12,8 @@
   align-items: center;
 
   &__wrapper {
-    min-width: 40vw;
-    min-height: 30vh;
+    min-width: 50vw;
+    min-height: 60vh;
     background-color: $main-background-color;
 
     display: flex;
@@ -24,52 +24,55 @@
     border-radius: 35px;
   }
 
-  &__money {
+  &__title {
+    font-family: 'Shantell Sans';
+    font-size: 36px;
+    margin-bottom: 1rem;
+  }
+
+  &__labels {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 0.5rem;
   }
 
   &__input {
-    min-width: 15vw;
-    min-height: 3vh;
-    background-color: #dbdbdb;
-    padding-left: 10px;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
+    min-width: 13rem;
+    min-height: 2rem;
+    border-radius: 25px;
+    background-color: $guests-background-color;
+    padding-left: 1rem;
   }
 
   &__buttons {
-
-  }
-
-  &__button {
-    margin: 1rem 0.5rem 0 0.5rem;
-    min-width: 8vw;
-    min-height: 3vh;
-    background-color: #8d8d8d;
-  }
-
-  &__fieldset {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 0.5rem;
+    gap: 5rem;
+  }
 
-    .fieldset {
-      &__radio {
-        margin: 0 2rem 0 2rem;
-      }
-
-      &__input {
-        margin: 0 0.3rem 0 0.3rem;
-      }
-
-      &__label {
-        
-      }
+  &__button {
+    min-height: 2rem;
+    padding: 0 1rem 0 1rem;
+    border-radius: 25px;
+    background-color: $guests-yellow;
+    
+    &--cancel {
+      background-color: $guests-red;
     }
+
+    &--add {
+      background-color: $guests-green;
+    }
+  }
+
+  &__money {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
   }
 
   &__display {

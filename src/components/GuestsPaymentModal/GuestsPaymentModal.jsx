@@ -60,7 +60,7 @@ function GuestsPaymentModal() {
   return (
     <section className="paymentModal">
       <div className="paymentModal__wrapper">
-        <h2 className="paymentModal__title">Добавить гостя</h2>
+        <h2 className="paymentModal__title">Рассчитать гостя</h2>
 
         <div className="paymentModal__description">
           <span>Время: <b>{currentGuest.start_time} - {currentGuest.stop_time}</b></span>

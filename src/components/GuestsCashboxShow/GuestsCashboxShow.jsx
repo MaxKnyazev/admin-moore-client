@@ -2,7 +2,7 @@ import './GuestsCashboxShow.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 // import { createValidDate, createValidTime } from '../../utils/utils';
-import { toggleShowAddGroupModal } from '../../store/guests/guestsActionCreaters';
+import { toggleShowCashboxModal } from '../../store/cashboxLogs/cashboxLogsActionCreaters';
 
 function GuestsCashboxShow() {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ function GuestsCashboxShow() {
   // const { currentShift } = useSelector(state => state.shiftsReducer);
 
   const buttonCashboxShow = () => {
-    
+    dispatch(toggleShowCashboxModal());
   }
 
   return (

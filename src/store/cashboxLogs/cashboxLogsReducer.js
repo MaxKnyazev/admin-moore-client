@@ -2,17 +2,13 @@ import {
   GET_ALL_CASHBOX_LOGS_PENDING, GET_ALL_CASHBOX_LOGS_SUCCESS, GET_ALL_CASHBOX_LOGS_ERROR, 
   ADD_CASHBOX_LOG_PENDING, ADD_CASHBOX_LOG_SUCCESS, ADD_CASHBOX_LOG_ERROR,
   TOGGLE_SHOW_CASHBOX_MODAL_SUCCESS, TOGGLE_SHOW_CASHBOX_MODAL_ERROR,
-  // CALCULATE_RESULT_MONEY_PENDING, CALCULATE_RESULT_MONEY_SUCCESS, CALCULATE_RESULT_MONEY_ERROR,
 } from './cashboxLogsActionTypes';
-// import { sortGuests } from '../../utils/utils';
 
 const initialState = {
   cashboxLogs: [],
   isLoading: false,
   error: null,
-  // cashbox: 0,
-  // income: 0,
-  // showModal: false,
+  showCashboxModal: false,
 }
 
 export const cashboxLogsReducer = (state = initialState, action) => {
@@ -39,33 +35,10 @@ export const cashboxLogsReducer = (state = initialState, action) => {
 
 
 
-      // case CALCULATE_RESULT_MONEY_PENDING:
-      //   return {...state, isLoading: true}
-      
-      // case CALCULATE_RESULT_MONEY_SUCCESS:
-      //   return {...state, isLoading: false, cashbox: action.payload.cashbox, income: action.payload.income}
-  
-      // case CALCULATE_RESULT_MONEY_ERROR:
-      //   return {...state, isLoading: false, error: action.payload}
-
-
-
-
-    // case EDIT_GUEST_PENDING:
-    //   return {...state, isLoading: true}
-    
-    // case EDIT_GUEST_SUCCESS:
-    //   let editedGuests = [...state.guests];
-    //   for (let i = 0; i < state.guests.length; i++) {
-    //     if (state.guests[i].id === action.payload.id) {
-    //       editedGuests[i] = {...action.payload.guest};
-    //     }
-    //   }
-
-    //   return {...state, isLoading: false, guests: sortGuests(editedGuests), currentGuest: {}, showModal: false}
-
-    // case EDIT_GUEST_ERROR:
-    //   return {...state, isLoading: false, error: action.payload, showModal: false}
+    case TOGGLE_SHOW_CASHBOX_MODAL_SUCCESS:
+      return {...state, showCashboxModal: !state.showCashboxModal}
+    case TOGGLE_SHOW_CASHBOX_MODAL_ERROR:
+        return {...state, error: action.payload}
 
 
 

@@ -2,7 +2,6 @@ import {
   GET_ALL_CASHBOX_LOGS_PENDING, GET_ALL_CASHBOX_LOGS_SUCCESS, GET_ALL_CASHBOX_LOGS_ERROR, 
   ADD_CASHBOX_LOG_PENDING, ADD_CASHBOX_LOG_SUCCESS, ADD_CASHBOX_LOG_ERROR,
   TOGGLE_SHOW_CASHBOX_MODAL_SUCCESS, TOGGLE_SHOW_CASHBOX_MODAL_ERROR,
-  // CALCULATE_RESULT_MONEY_PENDING, CALCULATE_RESULT_MONEY_SUCCESS, CALCULATE_RESULT_MONEY_ERROR,
 } from './cashboxLogsActionTypes';
 import { axiosInstance } from '../../utils/axiosInstance';
 import { calculateResultMoneyAsync } from '../shifts/shiftsActionCreaters';
@@ -82,79 +81,25 @@ export const addCashboxLogAsync = (options) => {
 
 
 
-// export const calculateResultMoneyPending = () => {
-//   return {
-//     type: CALCULATE_RESULT_MONEY_PENDING,
-//   }
-// }
+export const toggleShowCashboxModalSuccess = () => {
+  return {
+    type: TOGGLE_SHOW_CASHBOX_MODAL_SUCCESS,
+  }
+}
 
-// export const calculateResultMoneySuccess = (result) => {
-//   return {
-//     type: CALCULATE_RESULT_MONEY_SUCCESS,
-//     payload: result,
-//   }
-// }
+export const toggleShowCashboxModalError = (error) => {
+  return {
+    type: TOGGLE_SHOW_CASHBOX_MODAL_ERROR,
+    payload: error,
+  }
+}
 
-// export const calculateResultMoneyError = (error) => {
-//   return {
-//     type: CALCULATE_RESULT_MONEY_ERROR,
-//     payload: error,
-//   }
-// }
-
-// export const calculateResultMoneyAsync = (shiftId) => {
-//   return async (dispatch) => {
-//     try {
-//       dispatch(calculateResultMoneyPending());
-//       let result = {};
-
-//       const response = await axiosInstance.post('/cashbox/add', shiftId);
-//       const cashboxLog = response.data.cashboxLog;
-
-//       dispatch(calculateResultMoneySuccess(result));
-//     } catch (error) {
-//       dispatch(calculateResultMoneyError(error));
-//     }
-//   }  
-// }
-
-
-
-// export const editGuestPending = () => {
-//   return {
-//     type: EDIT_GUEST_PENDING,
-//   }
-// }
-
-// export const editGuestSuccess = ({ id, guest }) => {
-//   return {
-//     type: EDIT_GUEST_SUCCESS,
-//     payload: {
-//       id,
-//       guest
-//     },
-//   }
-// }
-
-// export const editGuestError = (error) => {
-//   return {
-//     type: EDIT_GUEST_ERROR,
-//     payload: error,
-//   }
-// }
-
-// export const editGuestAsync = ({ id, options }) => {
-//   return async (dispatch) => {
-//     try {
-//       dispatch(editGuestPending());
-
-//       const response = await axiosInstance.put(`/guests/edit/${id}`, options);
-//       const guest = response.data.editedGuest;
-//       console.log(response);
-
-//       dispatch(editGuestSuccess({ id, guest }));
-//     } catch (error) {
-//       dispatch(editGuestError(error));
-//     }
-//   }  
-// }
+export const toggleShowCashboxModal = () => {
+  return (dispatch) => {
+    try {
+      dispatch(toggleShowCashboxModalSuccess());
+    } catch (error) {
+      dispatch(toggleShowCashboxModalError(error));
+    }
+  }  
+}

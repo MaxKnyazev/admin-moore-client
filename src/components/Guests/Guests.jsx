@@ -11,10 +11,12 @@ import GuestsAddGuestModal from '../GuestsAddGuestModal';
 import GuestsPaymentGroupModal from '../GuestsPaymentGroupModal';
 import GuestsList from '../GuestsList';
 import GuestsNav from '../GuestsNav';
+import CashboxModal from '../CashboxModal';
 
 function Guests() {
   const dispatch = useDispatch();
   const { showPaymentModal, showAddGroupModal, showAddGuestModal, showPaymentGroupModal, isLoading } = useSelector(state => state.guestsReducer);
+  const { showCashboxModal } = useSelector(state => state.cashboxLogsReducer);
   const { currentShift } = useSelector(state => state.shiftsReducer);
 
 
@@ -51,6 +53,7 @@ useEffect(() => {
       { showAddGroupModal && <GuestsAddGroupModal /> }
       { showAddGuestModal && <GuestsAddGuestModal /> }
       { showPaymentGroupModal && <GuestsPaymentGroupModal /> }
+      { showCashboxModal && <CashboxModal /> }
     </section>
   )
 }
