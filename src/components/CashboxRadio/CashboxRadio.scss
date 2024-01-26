@@ -6,15 +6,23 @@
   align-items: center;
   gap: 0.5rem;
 
+  opacity: 0.8;
   min-height: 2rem;
-  padding: 0 1.5rem 0 0.5rem;
+  padding: 0 1rem 0 1rem;
   border-radius: 25px;
   background-color: $main-background-color;
-  border: 0.2rem solid $guests-yellow;
+  border: 4px solid $guests-yellow;
 
   &--active {
     background-color: $guests-yellow;
-    border: 0.2rem solid $guests-yellow;
+    color: red;
+    opacity: 1;
+    // border: 0.2rem solid $guests-yellow;
+  }
+
+  &--active &__title {
+    // color: ;
+    // opacity: 1;
   }
 
   &__dot {

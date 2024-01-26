@@ -1,0 +1,30 @@
+@import '../../variable';
+
+.inputNumber {
+  min-width: 15rem;
+  min-height: 2rem;
+  border-radius: 25px;
+  padding: 0 1rem 0 1rem;
+  background-color: $guests-background-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+
+  &__button {
+    background-color: $guests-red;
+    opacity: 0.8;
+    padding: 0.2rem;
+    border-radius: 7px;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__input {
+    background-color: $guests-background-color;
+    text-align: center;
+    max-width: 5rem;
+  }
+}

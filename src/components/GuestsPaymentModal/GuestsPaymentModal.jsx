@@ -2,11 +2,12 @@ import './GuestsPaymentModal.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { editGuestAsync, setCurrentGroupAsync, notShowPaymentModal} from '../../store/guests/guestsActionCreaters';
+import InputNumber from '../InputNumber';
 
 function GuestsPaymentModal() {
   const dispatch = useDispatch();
-  const [ modalCashInput, setModalCashInput ] = useState('');
-  const [ modalNoncashInput, setModalNoncashInput ] = useState('');
+  const [ modalCashInput, setModalCashInput ] = useState('0');
+  const [ modalNoncashInput, setModalNoncashInput ] = useState('0');
   const { currentGuest } = useSelector(state => state.guestsReducer);
 
   const inputHandler = (e, setInput) => {
@@ -27,22 +28,18 @@ function GuestsPaymentModal() {
       }}
     ));
 
-    setModalCashInput('');
-    setModalNoncashInput('');
+    setModalCashInput('0');
+    setModalNoncashInput('0');
   }
 
   const modalPaymentButtonHandler = () => {
     dispatch(editGuestAsync({
       id: currentGuest.id, 
       options: {
-
-//************************************************ */
         stop_time: currentGuest.stop_time,
         minutes: currentGuest.minutes,
         for_payment: currentGuest.for_payment,
         payment_description: currentGuest.payment_description,
-//************************************************ */
-
         cash: +modalCashInput,
         non_cash: +modalNoncashInput,
         result_money: +modalCashInput + +modalNoncashInput,
@@ -71,27 +68,13 @@ function GuestsPaymentModal() {
 
         <div className="paymentModal__calculation">
           <div className="paymentModal__box">
-            <label htmlFor="paymentCash">Наличные:</label>
-            <input
-              id="paymentCash" 
-              type="number" 
-              placeholder="Cash..." 
-              className="paymentModal__input" 
-              value={modalCashInput} 
-              onChange={e => {inputHandler(e, setModalCashInput)}} 
-            />
+            Наличные:
+            <InputNumber inputNumber={modalNoncashInput} setInputNumber={setModalNoncashInput} />
           </div>
 
           <div className="paymentModal__box">
-            <label htmlFor="paymentNoncash">Безналичные:</label>
-            <input
-              id="paymentNoncash"
-              type="number" 
-              placeholder="Non-cash..." 
-              className="paymentModal__input" 
-              value={modalNoncashInput} 
-              onChange={e => {inputHandler(e, setModalNoncashInput)}} 
-            />
+            По карте:
+            <InputNumber inputNumber={modalCashInput} setInputNumber={setModalCashInput} />
           </div>
         </div>
 

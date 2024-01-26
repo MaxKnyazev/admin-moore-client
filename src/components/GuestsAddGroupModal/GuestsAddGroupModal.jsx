@@ -55,11 +55,15 @@ function GuestsAddGroupModal() {
     setGuestsList(guestsList.map(elem => elem.id === id ? { ...elem, tariff: e.target.value } : elem))
   }
 
+  const outsideClickhandler = (e) => {
+    dispatch(toggleShowAddGroupModal());
+  }
+
   let count = 0;
 
   return (
-    <section className="addGroupModal">
-      <div className="addGroupModal__wrapper">
+    <section onClick={outsideClickhandler} className="addGroupModal">
+      <div onClick={(e) => {e.stopPropagation()}} className="addGroupModal__wrapper">
 
         <div className="addGroupModal__header">
           <h2 className="addGroupModal__title">Добавить группу</h2>

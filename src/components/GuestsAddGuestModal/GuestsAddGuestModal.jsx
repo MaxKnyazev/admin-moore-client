@@ -36,9 +36,13 @@ function GuestsAddGuestModal() {
     }
   }
 
+  const outsideClickhandler = (e) => {
+    dispatch(toggleShowAddGuestModal());
+  }
+
   return (
-    <section className="addGuestModal">
-      <div className="addGuestModal__wrapper">
+    <section onClick={outsideClickhandler} className="addGuestModal">
+      <div onClick={(e) => {e.stopPropagation()}} className="addGuestModal__wrapper">
         <h2 className="addGuestModal__title">Добавить гостя</h2>
 
         <div className="addGuestModal__settings">

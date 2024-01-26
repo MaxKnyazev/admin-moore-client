@@ -35,8 +35,7 @@ function GuestsItem({guest}) {
   }
 
   const deleteButtonHandler = (id) => {
-    dispatch(calculateBreakAsync({
-    }))
+    console.log('delete');
   }
 
   return (
