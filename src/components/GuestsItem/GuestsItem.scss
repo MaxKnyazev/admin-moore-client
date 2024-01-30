@@ -12,7 +12,7 @@
     display: flex;
     justify-content: flex-end;
     // align-content: center;
-    gap: 0.3rem;
+    gap: 0.5rem;
   }
 
   &__item {
@@ -40,24 +40,45 @@
       }
 
       &__button {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.8rem;
+        height: 1.8rem;
         border-radius: 50%;
+        overflow: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         &--blue {
           background-color: $guests-blue;
+
+          &:hover {
+            background-color: $guests-blue-hover;
+          }
         }
 
         &--green {
           background-color: $guests-green;
+
+          &:hover {
+            background-color: $guests-green-hover;
+          }
         }
 
         &--red {
           background-color: $guests-red;
+
+          &:hover {
+            background-color: $guests-red-hover;
+          }
         }
 
         &--yellow {
           background-color: $guests-yellow;
+
+          &:hover {
+            background-color: $guests-yellow-hover;
+          }
         }
       }
     }

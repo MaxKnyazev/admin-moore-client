@@ -1,6 +1,6 @@
 @import '../../variable';
 
-.guests__nav {
+.guestsNav {
   background-color: $guests-background-color-dark;
   width: 100%;
   padding: 1rem;
@@ -12,4 +12,53 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
+
+  &__item {
+    padding: 1vh 1vw 1vh 1vw;
+    border-radius: 20px;
+    background-color: $main-background-color;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+
+    &:hover {
+      background-color: $main-background-color-hover;
+    }
+  }
+
+  &__search {
+    padding: 1vh 1vw 1vh 1vw;
+    border-radius: 20px;
+    background-color: $main-background-color;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__clear {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $main-background-color;
+  }
+
+  &__input {
+    background-color: $main-background-color;
+
+    &:focus {
+      background-color: $guests-search-focus;
+    }
+  }
+
+  &__svg {
+    width: 1.2rem !important;
+  }
+
+  &--focus {
+    background-color: $guests-search-focus;
+  }
 }
