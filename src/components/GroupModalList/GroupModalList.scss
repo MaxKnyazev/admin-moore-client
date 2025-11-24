@@ -1,0 +1,9 @@
+.group__list {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: 60vw;
+  overflow-y: scroll;
+  background-color: rgb(245, 245, 245);
+  margin-top: 2vh;
+}

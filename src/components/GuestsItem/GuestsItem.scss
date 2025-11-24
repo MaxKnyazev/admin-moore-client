@@ -1,0 +1,86 @@
+@import '../../variable';
+
+.guests {
+  &__wrapper {
+    // border-bottom: 3px solid rgb(117, 193, 255);
+    margin-bottom: 2vh;
+    border-radius: 20px;
+    // width: 100%;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    // align-content: center;
+    gap: 0.5rem;
+  }
+
+  &__item {
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    // gap: 10px;
+    // grid-auto-rows: minmax(100px, auto);
+    padding: 0.3rem 0.7rem;
+    background-color: $main-background-color;
+
+    .item {
+      &__time {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      &__name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &__button {
+        width: 1.8rem;
+        height: 1.8rem;
+        border-radius: 50%;
+        overflow: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &--blue {
+          background-color: $guests-blue;
+
+          &:hover {
+            background-color: $guests-blue-hover;
+          }
+        }
+
+        &--green {
+          background-color: $guests-green;
+
+          &:hover {
+            background-color: $guests-green-hover;
+          }
+        }
+
+        &--red {
+          background-color: $guests-red;
+
+          &:hover {
+            background-color: $guests-red-hover;
+          }
+        }
+
+        &--yellow {
+          background-color: $guests-yellow;
+
+          &:hover {
+            background-color: $guests-yellow-hover;
+          }
+        }
+      }
+    }
+  }
+}

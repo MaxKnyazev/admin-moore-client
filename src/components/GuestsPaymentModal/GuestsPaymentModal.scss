@@ -1,0 +1,85 @@
+@import '../../variable';
+
+.paymentModal {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  &__wrapper {
+    min-width: 50vw;
+    min-height: 60vh;
+    background-color: $main-background-color;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 35px;
+  }
+
+  &__title {
+    font-family: 'Shantell Sans';
+    font-size: 36px;
+    margin-bottom: 2rem;
+  }
+
+  &__description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 3vh;
+  }
+
+  &__calculation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__input {
+    min-width: 13rem;
+    min-height: 2rem;
+    border-radius: 25px;
+    background-color: $guests-background-color;
+    padding-left: 1rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+  }
+
+  &__button {
+    min-height: 2rem;
+    padding: 0 1rem 0 1rem;
+    border-radius: 25px;
+    
+    &--cancel {
+      background-color: $guests-red;
+    }
+
+    &--accept {
+      background-color: $guests-green;
+    }
+  }
+}
